@@ -1,0 +1,55 @@
+<?php
+
+function iieddocssearch_search_block_form($form, &$form_state) {
+  $form['keys'] = array(
+    '#type' => 'textfield',
+    '#size' => 15,
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Search',
+  );
+  return $form;
+}
+
+function iieddocssearch_search_block_form_submit($form, &$form_state) {
+  drupal_goto('custom/node/search/' . $form_state['values']['keys']);
+}
+
+function iieddocssearch_menu() {
+  $items['custom/node/search/%'] = array(
+    'page callback' => 'iieddocssearch_do_search',
+    'page arguments' => array(3),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function iieddocssearch_do_search($keys) {
+  // set the page title
+  drupal_set_title('Documents search results');
+  // get the search results
+  $results = module_invoke('node', 'search_execute', $keys . " type:documents");
+  return theme('search_results', array('results' => $results));
+}
+
+function iieddocssearch_block_info() {
+  $blocks['searchform'] = array(
+    'info' => t('Documents Search Block'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+ 
+function iieddocssearch_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'searchform':
+      $block['title'] = 'Custom Documents Search';
+      $block['content'] = drupal_render(drupal_get_form('iieddocssearch_search_block_form'));
+      break;
+  }
+  return $block;
+}

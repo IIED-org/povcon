@@ -1,0 +1,7 @@
+<?php
+
+
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'iied_migrate') .
+  '/article.inc';
+
+

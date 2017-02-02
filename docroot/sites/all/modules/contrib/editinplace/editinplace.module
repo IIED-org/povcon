@@ -1,0 +1,21 @@
+<?php
+/**
+ * @file
+ * Provides Edit In-Place functionality for Drupal forms
+ */
+
+function editinplace_field_info_alter(&$info) {
+  foreach ($info as &$field) {
+    $field['instance_settings']['edit_in_place'] = 1;
+  }
+  //dpm($info);
+}
+
+function editinplace_field_formatter_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items, $displays) {
+  //dpm(get_defined_vars());
+}
+
+function editinplace_form_field_ui_display_overview_form_alter($form, &$form_state, $form_id) {
+  dpm($form);
+  dpm($form_state);
+}

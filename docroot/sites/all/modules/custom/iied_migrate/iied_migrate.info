@@ -1,0 +1,8 @@
+name = "Migration from bespoke CMS to Drupal 7"
+description = "Migrates content from flat CSV files, that originated in our bespoke CMS"
+dependencies[] = migrate
+dependencies[] = migrate_extras
+files[] = iied_migrate.module
+files[] = article.inc
+core = 7.x
+package = "iied"
