@@ -1,0 +1,6 @@
+[17-Jan-2012 02:36:41] PHP Parse error:  syntax error, unexpected '<' in /home/alldigit/public_html/dev-sites/iied/sites/all/themes/iied/templates/node.tpl.php on line 28
+[17-Jan-2012 02:36:46] PHP Parse error:  syntax error, unexpected '<' in /home/alldigit/public_html/dev-sites/iied/sites/all/themes/iied/templates/node.tpl.php on line 28
+[17-Jan-2012 03:06:03] PHP Parse error:  syntax error, unexpected '<' in /home/alldigit/public_html/dev-sites/iied/sites/all/themes/iied/template.php on line 235
+[17-Jan-2012 03:06:35] PHP Fatal error:  Cannot redeclare iied_preprocess_page() (previously declared in /home/alldigit/public_html/dev-sites/iied/sites/all/themes/iied/template.php:20) in /home/alldigit/public_html/dev-sites/iied/sites/all/themes/iied/template.php on line 271
+[17-Jan-2012 19:48:33] PHP Fatal error:  Call to undefined function  menu_execute_active_handler() in /home/alldigit/public_html/dev-sites/iied/index.php on line 21
+[22-Jan-2012 22:50:22] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0

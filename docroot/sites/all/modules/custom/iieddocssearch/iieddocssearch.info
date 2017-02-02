@@ -1,0 +1,5 @@
+name = "Docs content type search block"
+description = "Creates a form block for searching documents"
+files[] = iied_docssearch.module
+core = 7.x
+package = "iied"

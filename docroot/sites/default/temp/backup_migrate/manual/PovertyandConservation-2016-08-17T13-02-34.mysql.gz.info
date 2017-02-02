@@ -1,0 +1,8 @@
+filename = "PovertyandConservation-2016-08-17T13-02-34"
+description = ""
+datestamp = "1471438963"
+generator = "Backup and Migrate (http://drupal.org/project/backup_migrate)"
+generatorversion = "7.x-2.x"
+sites[0][version] = "7.50"
+sites[0][name] = "Poverty and Conservation"
+sites[0][url] = "http://povertyandconservation.info/"

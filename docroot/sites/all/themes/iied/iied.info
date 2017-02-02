@@ -1,0 +1,65 @@
+name = iied
+description = Custom theme for iied's poverty and conservation information site by 4allDigital.com
+screenshot = images/screenshot.gif
+core = "7.x"
+project = "iied"
+engine = phptemplate
+
+regions[page_top] = Page top
+regions[header] = Header
+regions[search] = Search Box
+regions[main_navigation] = Main Navigation
+regions[highlight] = Highlight
+regions[help] = Help
+regions[content] = Content
+regions[slider] = Homepage slider
+regions[content_area_1] = Content Area 1
+regions[content_area_2] = Content Area 2
+regions[editors_pick] = Editors pick
+regions[sidebar_first] = First sidebar
+regions[sidebar_second] = Second sidebar
+regions[latest_updates] = Latest Updates
+regions[footer_box1] = Footer Box 1
+regions[footer_box2] = Footer Box 2
+regions[footer_box3] = Footer Box 3
+regions[footer_box4] = Footer Box 4
+regions[custom_search_area] = Custom Search Area
+regions[sponsors] = Sponsors
+
+
+
+regions[page_bottom] = Page bottom
+
+features[] = logo
+features[] = name
+features[] = slogan
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = search
+features[] = favicon
+features[] = main_menu
+features[] = secondary_menu
+
+stylesheets[all][] = css/default.css
+stylesheets[all][] = css/layout.css
+stylesheets[all][] = css/style.css
+stylesheets[print][] = css/print.css
+
+scripts[] = js/general.js
+scripts[] = js/textFill.js
+
+; Compass Support
+; http://drupal.org/project/compass
+compass[status] = 1
+compass[sass_dir] = sass
+compass[css_dir] = css
+
+settings[iied_tabs] = 1
+settings[iied_breadcrumb_separator] = »
+settings[wireframe_mode] = 0
+settings[clear_registry] = 0
+; Information added by 4alldigital packaging script on 2011-12-03
+version = "7.x-1.0"
+core = "7.x"
+project = "iied"
+datestamp = "1309435416"

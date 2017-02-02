@@ -1,0 +1,581 @@
+/* Font styles. */
+/* line 2, ../sass/style.sass */
+body {
+  margin: 0;
+  /* Setting up font size, leading and font family
+   * http://www.markboulton.co.uk/journal/comments/five-simple-steps-to-better-typography */
+  font-family: Verdana, Geneva, sans-serif;
+  /*letter-spacing: 0.03em; */
+	background-color: #F2F2EE;
+	background-image: url('/sites/default/files/background.jpg');	
+	background: #F2F2EE; /* Old browsers */
+	/*font-family: Verdana, sans-serif;*/
+font-size: 13px;
+font-style: normal;
+font-weight: normal;
+text-transform: normal;
+letter-spacing: normal;
+line-height: 1.4em;
+}
+
+/* Links */
+/* line 11, ../sass/style.sass */
+a:link, a:visited {
+  color: #4C78FA;
+  text-decoration: none; }
+
+/* line 16, ../sass/style.sass */
+a:hover, a:active {
+  color: #1A52F9;
+  text-decoration: none; }
+
+/* Titles. */
+/* line 21, ../sass/style.sass */
+
+#logo {
+	float: left;
+	margin-right: 30px;
+}
+
+#site-name {
+  font-size: 2.5em;
+  font-weight: 600;
+  padding: 0.1em 0 0;
+  margin: 0; 
+}
+
+#name-and-slogan{
+	float: left;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+h1#site-name {  
+	font-size: 3.2em; 
+	margin-top: 0;    
+	position: relative;
+}  
+  
+h1#site-name a {  
+        text-decoration: none;  
+        color: #92C846;  
+        position: absolute;  
+        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,.5)));  
+}  
+  
+h1#site-name:after {  
+        content : 'Poverty and Conservation';  
+        color: #d6d6d6;  
+        text-shadow: 0 1px 0 white;  
+}
+
+#site-slogan{
+	color: #282828;
+    font-size: 1.3em;
+    font-style: italic;
+}
+
+/* line 28, ../sass/style.sass */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3em; 
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* line 31, ../sass/style.sass */
+h1 {
+  font-size: 1.3em;
+  font-weight: 300;
+  padding: 0 0 0.5em;
+  margin: 0; }
+
+/* line 37, ../sass/style.sass */
+h2 {
+  font-size: 1.3em;
+  font-weight: normal;
+  margin-bottom: 0.75em;
+   }
+
+.sidebar h2{
+    color: #92C846;
+    font-size: 1.6em;
+	 font-weight: normal;
+}
+/* line 42, ../sass/style.sass */
+h3 {
+ 	font-size: 1.4em;
+    font-style: normal;
+    font-weight: normal;
+    margin-bottom: 1em;
+  }
+
+/* line 46, ../sass/style.sass */
+h4 {
+  font-size: 1.2em;
+  margin-bottom: 0.8em;
+  font-style:normal; 
+   font-weight: normal;
+}
+
+/* line 50, ../sass/style.sass */
+h5 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 0; }
+
+/* line 55, ../sass/style.sass */
+h6 {
+  font-size: 1em;
+  font-weight: bold; }
+
+/* Paragraph styles. */
+/* line 60, ../sass/style.sass */
+p {
+  margin: 0 0 1em 0; 
+  line-height: 1.67em;
+}
+
+/* List styles. */
+/* line 64, ../sass/style.sass */
+ul, ol {
+  margin-left: 0;
+ }
+
+/* Table styles. */
+/* line 69, ../sass/style.sass */
+table {
+  width: 99%; }
+
+/* line 74, ../sass/style.sass */
+tr.even td,
+tr.odd td {
+  padding: 10px 5px; }
+
+/* line 77, ../sass/style.sass */
+tr.odd {
+  background-color: white; }
+
+/* Code. */
+/* line 81, ../sass/style.sass */
+pre, code, tt {
+  font: 1em "andale mono", "lucida console", monospace;
+  line-height: 1.5; }
+
+/* line 85, ../sass/style.sass */
+pre {
+  background-color: #efefef;
+  display: block;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #aaaaaa; }
+
+/* List styles. */
+/* line 93, ../sass/style.sass */
+ul {
+  list-style-type: disc;
+  margin-bottom: 1em;
+ }
+  /* line 95, ../sass/style.sass */
+  ul ul {
+    list-style-type: circle; }
+    /* line 97, ../sass/style.sass */
+    ul ul ul {
+      list-style-type: square; }
+      /* line 99, ../sass/style.sass */
+      ul ul ul ul {
+        list-style-type: circle; }
+
+/* line 102, ../sass/style.sass */
+ol {
+  list-style-type: decimal; }
+  /* line 104, ../sass/style.sass */
+  ol ol {
+    list-style-type: lower-alpha; }
+    /* line 106, ../sass/style.sass */
+    ol ol ol {
+      list-style-type: decimal; }
+
+/* Abbreviation. */
+/* line 110, ../sass/style.sass */
+abbr {
+  border-bottom: 1px dotted #666666;
+  cursor: help;
+  white-space: nowrap; }
+
+/* UI improvments. */
+/* line 116, ../sass/style.sass */
+#edit-title {
+  font-size: 24px;
+  width: 99%; }
+
+/* line 120, ../sass/style.sass */
+#system-themes-form img {
+  width: 100px; }
+
+/* line 123, ../sass/style.sass */
+.form-item .description {
+  font-style: italic;
+  line-height: 1.2em;
+  font-size: 0.8em;
+  margin-top: 5px;
+  color: #777777; }
+
+/* line 130, ../sass/style.sass */
+#edit-delete {
+  color: #cc0000; }
+
+/* Console, style from slate theme. */
+/* line 134, ../sass/style.sass */
+div.messages {
+  padding: 9px;
+  margin: 1em 0;
+  color: #003366;
+  background: #bbddff;
+  border: 1px solid #aaccee; }
+
+/* line 141, ../sass/style.sass */
+div.warning {
+  color: #884400;
+  background: #ffee66;
+  border-color: #eedd55; }
+
+/* line 146, ../sass/style.sass */
+div.error {
+  color: white;
+  background: #ee6633;
+  border-color: #dd5522; }
+
+/* line 151, ../sass/style.sass */
+div.status {
+  color: #336600;
+  background: #ccff88;
+  border-color: #bbee77; }
+
+/* Region Colors. delete when starting a new theme. */
+/* line 157, ../sass/style.sass */
+#header, #footer {
+
+}
+/* line 160, ../sass/style.sass */
+
+/* line 163, ../sass/style.sass */
+
+#content-area{
+	padding: 10px 30px;
+}
+
+#content-area ul li{
+	/*list-style:none;*/
+	margin: 0 0 5px 15px;
+}
+
+.front #content-area ul li{
+	list-style:none;
+	margin: 0;
+}
+
+.content-box{
+	margin-bottom: 40px;
+	padding-bottom: 20px;
+}
+
+/* line 166, ../sass/style.sass */
+
+#main{
+	background: none repeat scroll 0 0 #FFFFFF;
+	box-shadow: 0 0 1px #C2C2C2; -webkit-box-shadow: 0 0 1px #C2C2C2; -moz-box-shadow: 0 0 1px #C2C2C2;
+	margin-top: 3px;
+	padding-top: 40px;
+	width: 990px;
+	padding-bottom: 25px;
+}
+
+
+/***************************************************
+******  specific node content styling **************
+****************************************************/
+
+#content-header h1, #content h2.block-title{
+    color: #92C846;
+    font-size: 1.875em;
+    font-weight: normal;
+    line-height: 26px;
+   }
+
+.main-title
+	{
+		
+		float: left;
+	/*	height:70px;*/
+		margin: 0 0 0 1em;
+		width: 620px;
+}
+
+/*
+#content .title-right{
+	background-image: url("/sites/all/themes/iied/ui/header-bg-right.png");
+	background-repeat: no-repeat;
+	background-position: -16px 0;
+	float:left;
+	width: 25px;
+	height: 60px;
+}
+
+#content .title-left{
+	background-image: url("/sites/all/themes/iied/ui/header-bg-left.png");
+	background-repeat: no-repeat;
+	margin-left: -39px;
+	background-position: 0 0;
+	width: 25px;
+	height: 60px;
+	float:left;
+	
+}
+*/
+.content .field{
+	margin: 12px 20px 12px 0;
+	clear: both;
+	overflow: hidden;
+}
+
+.content .field-name-field-authors .field-item{
+	float: left;
+	margin-right: 5px;
+	padding-right: 5px;
+	border-right: 1px solid #e2e2e2;
+}
+
+.content .field-name-field-rel-link{
+	border-top: 1px solid #CCC;
+	padding-top: 10px;
+}
+/*
+.content .field-name-field-rel-link a{
+	background-image: url("../ui/link-arrow.png");
+	    background-position: 0 5px;
+	    background-repeat: no-repeat;
+	    font-size: 0.9em;
+	    padding-left: 20px;
+}
+*/
+
+/* document type icon styling - pwoered by Jquery addClass in general.js */
+
+.pdf {
+	background-image: url("../ui/pdf-icon.gif");
+	background-repeat:no-repeat;
+	display: block;
+	padding: 7px 0px 7px 30px;
+}
+
+/*
+.small{
+	background-image: url("../ui/PDF-icon-small.png");
+	background-repeat:no-repeat;	
+}
+*/
+.slides{
+	padding: 7px 0px 7px 40px;
+	background-image: url("../ui/PowerPoint-icon.jpg");
+	background-repeat:no-repeat;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+.excel{
+	padding: 7px 0px 7px 40px;
+	background-image: url("../ui/excel-icon.jpg");
+	background-repeat:no-repeat;
+}
+
+.word{
+	padding: 7px 0px 7px 40px;
+	background-image: url("../ui/word-icon.jpg");
+	background-repeat:no-repeat;
+}
+
+.caption {
+	color: #999;
+}
+
+
+.form-select {
+	max-width: 250px;
+}
+
+#page .views-exposed-form .views-exposed-widget{
+	/*float:right;*/
+}
+
+/*
+#content .view .view-filters{
+   background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px;
+    box-shadow: 0 0 1px #C2C2C2; -webkit-box-shadow: 0 0 1px #C2C2C2; -moz-box-shadow: 0 0 1px #C2C2C2;
+    float: right;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 600px;
+}
+*/
+
+.views-exposed-widgets { 
+    margin-bottom: 3em;
+}
+
+/*
+#page #content .view .view-content{
+	clear: both;
+}
+*/
+
+/* admin menu styes */
+div#admin-toolbar div.admin-tab li a{
+	color: #CCCCCC;
+}
+
+.form-item input.error, .form-item textarea.error, .form-item select.error{
+	border: 2px solid #9AA4AD;
+}
+
+/* homage page latest updates */
+#latest-updates .views-row span{
+	display: block;
+	margin: 10px 0;
+}
+
+#latest-updates .views-row{
+	border-top: 1px solid #FFFFFF;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+#latest-updates .views-row.views-row-first{
+	border-top: none;
+}
+
+#latest-updates .views-row.views-row-last{
+	border-bottom: none;
+}
+
+
+/*
+
+	VIEWS LIST SPECIFIC STYLING
+	
+*/
+
+
+.biblio_publisher{
+	font-style: italic;
+}
+
+.biblio_publisher:before {
+	content:"(";
+}
+.biblio_publisher:after{
+	content:")";
+}
+
+.view-all-bibliographies .views-field-field-month-year, .biblio_publisher{
+	color: #111111;
+}
+
+.view-all-bibliographies .views-field-title{
+	font-weight: 1.1em;
+}
+
+.view-all-bibliographies .views-label{
+	float: left;
+	margin-right: 6px;
+	color: #222222;
+}
+
+/*
+#main #content .view-all-bibliographies .views-row-odd{
+	margin: 13px 0;
+	padding: 10px;
+	background-color: #f2f2f2;
+	border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;
+}
+
+#main #content .view-all-bibliographies .views-row-even{
+	margin: 13px 0;
+	padding: 10px;
+	}
+*/
+	
+#main #content .view-all-bibliographies .views-field-title,#main #content .view-all-bibliographies .views-field-field-summary{
+	margin: 6px 0 5px 0px;
+}
+
+#main #content-area ul li{
+	list-style: none;
+	margin-left: 20px;
+}
+
+#main #content-area .field-item ul li{
+	list-style: disc;
+}
+
+.page-en-documents #main #content .view-all-documents li{
+	margin: 10px 0;
+	padding: 10px 0;
+	border-bottom: 1px dotted #e2e2e2;
+}
+
+/* hr tags */
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	margin: 2em 0;
+}
+/* accordian */
+
+#jquery-ui-filter .ui-corner-all {
+	border-radius: 0;
+}
+#jquery-ui-filter .ui-state-default {
+	background:none;
+}
+
+#jquery-ui-filter .ui-state-hover, #jquery-ui-filter .ui-state-focus {
+	background:#9ECE51 !important;
+}
+
+#jquery-ui-filter .ui-widget {
+	font: 13px/1.5em "Helvetica Neue", helvetica, Arial, sans-serif;
+    letter-spacing: 0.03em;
+}
+
+#jquery-ui-filter .ui-accordion-header a {
+    font-weight: bold;
+}
+
+.ui-helper-reset {
+    font: 13px/1.5em "Helvetica Neue", helvetica, Arial, sans-serif;
+}
+
+/* search buttons */
+
+#edit-submit-bio-pov-search, #edit-submit-all-bibliographies, #edit-submit-all-events, #edit-submit-all-initiatives ,#edit-submit-all-organisations {
+    background: none repeat scroll 0 0 #92C846;
+    border: medium none;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 1em;
+    outline: 0 none;
+    overflow: visible;
+    padding: 0.3em 0.5em;
+    text-shadow: none;
+    width: auto;
+}
+
+/* image caption */
+.content .field-name-field-image-caption {
+	color: #767676;
+    margin: -1em 0 2em;
+	font-size: 12.2px
+}

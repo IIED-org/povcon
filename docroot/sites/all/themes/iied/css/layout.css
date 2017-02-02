@@ -1,0 +1,1003 @@
+/* Layout
+ * ------
+ * Using a negative margin technique, adapted from ZEN. The page is loaded by this order:
+ *
+ * 1. Header
+ * 2. Content
+ * 3. Navigation menus
+ * 4. Sidebar Left
+ * 5. Sideabr Right */
+/* remove 'auto' and the width to switch to a fluid width */
+/* line 15, ../sass/layout.sass */
+#page {
+  width: 990px;
+  margin: 0 auto; 
+	position: relative;
+	margin-top: 10px;
+}
+
+.feed-icon {
+	display:none;
+}
+
+.view-bio-pov-search .feed-icon, .view-all-bibliographies .feed-icon {
+	display: block !important;
+}
+
+/* Layout rules. (Disclaimer: do not change if you're not sure you know what you're doing.) */
+/* line 20, ../sass/layout.sass */
+#content {
+	margin-top: 0px;
+  float: left;
+ /* width: 100%;
+  background-color: #fefefe;
+  border-radius: 0 5px 5px 5px; -webkit-border-radius: 0 5px 5px 5px; -moz-border-radius: 0 5px 5px 5px;
+  padding: 8px; 
+*/
+}
+
+#sidebar{
+	width: 272px;
+	float: left;
+}
+
+/* line 26, ../sass/layout.sass */
+.sidebar {
+  float: left; }
+
+/* line 29, ../sass/layout.sass */
+#sidebar-second {
+  float: left; }
+
+/* line 32, ../sass/layout.sass */
+#footer {
+
+  float: none;
+  clear: both; 
+	margin-top: 25px;
+	color: #f2f2f2;
+	text-align: left;
+	padding:0px 0px 77px 0;
+	font-size: 0.9em;
+}
+
+#footertext{
+	margin: auto;
+    width: 1000px;
+}
+
+#footer-inner{
+	background-image:url('../ui/footer-fade.png');
+	background-repeat: repeat-x;
+	padding: 30px 10px 0;
+
+}
+
+#footer a{
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+
+/* Layout Helpers */
+/* line 37, ../sass/layout.sass */
+#header,
+#footer,
+.mission,
+.breadcrumb,
+.node {
+  clear: both; }
+
+/*
+.breadcrumb a{
+	margin: 0 4px;
+	padding: 0 5px;
+}
+*/
+/* Sidebars width
+ * --------------
+ * Changing the width of the sidebars is dead easy, just change the
+ * values below corresponding to the sidebar you want to modify.
+ * Make sure you keep negative values as negative values.
+ * For example, if I want to increase the width of the left sidebar
+ * to 300px, I would have to change each '190' to '300'. */
+/* line 55, ../sass/layout.sass */
+.two-sidebars .center,
+.sidebar-first .center {
+  margin-left: 0px; }
+
+/* line 59, ../sass/layout.sass */
+#sidebar-first, #sidebar-second, #latest-updates, #editors-pick {
+ 	padding: 10px 30px 10px 0;
+	margin-top: 0px;
+	
+}
+
+/* line 65, ../sass/layout.sass */
+.two-sidebars .center,
+.sidebar-second .center {
+ }
+
+/* line 69, ../sass/layout.sass */
+#sidebar-second {
+ }
+
+/* Columns Inner
+ * -------------
+ * You can change the padding inside the columns without changing the
+ * width of them by just usinbg the INNER div of each column */
+/* line 76, ../sass/layout.sass */
+.inner {
+  padding: 0; }
+
+/* Navigation styles
+ * -----------------
+ * The navigation is loaded after the content, so we need to make space
+ * for it, equal to its height, so if you change the height of the navigation,
+ * remember to adapt the margin top of the content and sidebars. */
+/* line 84, ../sass/layout.sass */
+
+/* line 94, ../sass/layout.sass */
+.with-navigation #content,
+.with-navigation .sidebar {
+  
+}
+
+/* MAIN NAVIGATION STYLING */
+
+#superfish-1 {
+	margin: 1.5em 0;
+}
+
+.sf-menu.sf-style-white li, .sf-menu.sf-style-white.sf-navbar {
+	
+}
+
+#block-superfish-1 {
+    left: 150px;
+    position: absolute;
+    top: 80px;
+	width: 600px;
+}
+
+
+#main-nav{
+	clear:both;
+	width: 960px;
+}
+
+/*
+
+#main-nav a{
+	color: #333333;
+}
+
+#secondary a {
+	font-size: 15px;
+	color: ##274C27;	
+}
+
+#main-nav a:hover{
+	color: #399C53;
+	text-decoration:none;
+}
+
+#main-nav ul#primary a.active-trail {
+	color: #399C53;
+	text-decoration:none;
+}
+
+#main-nav ul#secondary {
+    padding: 10px 0;
+}
+
+#main-nav ul#secondary a.active-trail {
+	border-bottom: 4px solid #399C53;
+	color: #399C53;
+    padding-bottom: 10px;
+}
+
+#navigation {
+	margin-left: 50px;
+}
+
+#navigation li{
+	list-style:none;
+	float:left;
+	margin-right: 20px;
+	padding: 0;		
+}
+
+
+#main-nav ul#primary li {
+  	border-left: 1px dotted #399C53;
+    display: block;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin: -28px 0 15px;
+    padding: 5px 12px;
+    width: 100px;
+}
+
+#main-nav ul#primary {
+	margin-left: 110px;
+}
+
+#main-nav li a:hover, #main-menu li a:active, #main-menu li a.active-trail {
+    transition: all 0.2s ease-in-out 0s;
+}
+
+
+ul#secondary-menu {
+    clear: left;
+    display: block;
+    margin-right: -2em;
+    margin-top: 34px;
+}
+ul#secondary-menu li {
+    margin-right: 1.4em;
+    padding-left: 0;
+}
+ul#secondary-menu li a.active {
+    background: none repeat scroll 0 0 #CFEAF6;
+    padding: 5px;
+}
+*/
+
+#main-nav .content{
+	width: 990px;
+}
+
+#main #content{
+	width: 660px;
+	margin-left: 20px;
+	min-height: 700px;
+}
+
+/*
+#sidebar-first .content, #sidebar-second .content, #latest-updates-inner, #editors-pick-inner {
+	width: 240px;
+	color: #444444;
+	padding: 15px 0;
+	overflow: hidden;
+}
+*/
+/*
+.views-field-title{
+	 font-weight:bold;
+	margin-bottom: 1em;
+}
+
+ 
+#latest-updates-inner{
+	font-size: 0.8em;
+}
+
+#latest-updates .block-inner h2{
+	margin:0;
+}
+ */
+/*
+#latest-updates .block-inner span a, #editors-pick .block-inner  span a, .view-iied-rss .views-field-description .field-content a, .arrow-links{
+	font-size:0.9em;
+	padding-left: 20px;
+	background-image: url('../ui/link-arrow.png');
+	background-repeat: no-repeat;
+	background-position: 0 5px;
+	 margin: 5px 0;
+}
+*/
+
+#content .arrow-links{
+	margin:20px 0;
+	display:block;
+}
+/*
+#latest-updates .block-inner .content{
+	margin: 0 0 10px;
+	border-bottom: 2px dotted #d2d2d2;
+	padding-bottom: 8px;
+}
+*/
+
+/* view content type styles 
+#content .view .views-row {
+	margin: 13px 0;
+	padding-bottom: 10px;
+	border-bottom: 1px dotted #d2d2d2;
+}
+*/
+
+/***************
+***** news specific styles ******
+********************/
+
+/*
+.view-latest-news .views-row-even, .view-iied-rss .views-row-even{
+	background-color: #f2f2f2;
+	padding: 10px;
+	margin: 15px 0;
+	border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;
+}
+
+
+.view-latest-news .views-row-odd{
+	padding:10px;
+}
+*/
+
+/* form styles */
+
+#search-block-form {
+	margin: 10px 0 20px 0; 
+}
+
+.form-item{
+	clear:both;
+	margin: 10px 0;
+}
+
+.form-submit{
+	float: right;
+	margin: 5px;
+}
+.form-item label{
+	/*float:left;*/
+	margin: 0 10px 10px 0;
+	font-weight: normal;
+}
+
+#contact-site-form .form-item label {
+	float:none;
+}
+
+.form-item input[type=text], .form-item input[type=submit]{
+	border: 1px solid #A6A8AB;
+    height: 17px;
+    margin-bottom: 5px;
+    padding: 3px;
+	width: 160px;
+}
+
+#sidebar .form-submit{
+	padding: 4px 32px;
+}
+/*
+#block-search-form .block-inner {
+	width: 201px;
+}
+*/
+.standfirst {
+	font-size: 15px; 	
+}
+
+/* phplist specific 
+.form-item label.option{
+	line-height: 1.2em;
+}
+
+#phplist-subscribe-form .form-type-textfield {
+}
+
+#phplist-subscribe-form .form-type-checkbox {
+}
+
+.front .block-phplist h2.block-title {
+    font-size: 1.875em;
+    line-height: 26px;
+}
+
+*/
+
+/*
+#main-sidebar .form-checkboxes .form-item, #main-sidebar .form-radios .form-item{
+	padding: 10px 0;
+}
+*/
+#block-phplist-PHPlist .phplist_dsc {
+	display:none;
+}
+
+
+
+/* seacrh form styling */
+#search-region{
+	position: absolute;
+	right: 0;
+	top: 10px;
+	
+}
+
+/* siderbar contetn styles */
+.sidebar ul li{
+	border-bottom: 1px solid #CCCCCC;
+	    list-style: none outside none;
+	    margin: 6px 0;
+	    padding-bottom: 10px;
+}
+
+/* sponsors logo */
+#sponsors{
+  background-image: url("../ui/page-shadow.png");
+    background-repeat: no-repeat;
+    height: 195px;
+    margin: auto;
+    padding: 40px 0 20px;
+    width: 1030px;
+}
+
+#sponsors-inner .region-sponsors{
+	    padding: 0 0 20px;
+}
+
+#sponsors-inner{
+    padding-bottom: 24px;
+}
+
+#home-slider{
+	margin: -32px 0 20px 0;
+	background:#92C846;
+}
+
+#home-slider .home-text { 
+  	color: #FFFFFF;
+    font-size: 22px;
+    left: 50px;
+    line-height: 1.5em;
+    position: absolute;
+    top: 20px;
+    width: 285px;
+}
+
+.column.sidebar{
+	margin-bottom: 20px;
+}
+/*
+#block-views-tweets-block h2{
+	background-image: url("../ui/twitter1.jpg");
+    background-position: 220px -5px;
+    background-repeat: no-repeat;
+    height: 20px;
+    padding-right: 35px;
+}
+*/
+
+/*
+#custom-search-blocks-form-1, #custom-search-blocks-form-2, #custom-search-blocks-form-3, #custom-search-blocks-form-4, #custom-search-blocks-form-5, #custom-search-blocks-form-6{
+	display:none;
+}
+*/
+
+.page-node-4802 #main .field-items ul, .page-node-4805 #main .field-items ul {
+	padding: 0;
+	list-style: none;
+	margin: 0;
+}
+
+.page-node-7911 #main .field-items ol, .page-node-7912 #main .field-items ol{
+   background-color: #F2F2F2;
+    border-radius: 4px 4px 4px 4px;
+    padding: 10px 10px 10px 30px;
+    margin: 15px 0;
+}
+
+.page-node-7911 #main .field-items ol li, .page-node-7912 #main .field-items ol li{
+    border-bottom: 1px solid #E2E2E2;
+    border-top: 1px solid #FFFFFF;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.page-node-7911 #main .field-items ol li:first-child, .page-node-7912 #main .field-items ol li:first-child{
+	border-top: 0;
+}
+
+.page-node-7911 #main .field-items ol li:last-child, .page-node-7912 #main .field-items ol li:last-child{
+	border-bottom: 0;
+}
+
+.page-node-4802 #main .field-items ul{
+	margin: 0;
+}
+
+/*
+.page-node-4802 #main .field-items ul li, .page-node-4805 #main .field-items ul li{
+	background-color: #f2f2f2;
+	padding: 10px;
+	border-radius:4px;
+	list-style: none !important;
+}
+
+.page-node-4799 #main .field-items ul, .page-node-4804 #main .field-items ul{
+	margin: 20px 0;
+	background-color: #f2f2f2;
+	padding: 10px;
+	border-radius:4px;
+}
+
+.page-node-4799 #main .field-items ul li li{
+	padding: 0;
+	margin: 0;
+	border-radius: 0;
+	
+}
+
+.page-node-4805 #main .field-items ul li ul li{
+	background-color: transparent;
+	    border-radius: 0 0 0 0;
+	    font-size: 0.9em;
+	    height: 40px;
+	    margin: 5px 0;
+	    padding: 0 0 0 42px;
+}
+*/
+
+/*
+#main #content .view .views-row {
+	border-bottom: none;
+}
+
+.front #main #content .view .views-row {
+	border-bottom: 1px solid #D2D2D2;
+}
+
+
+#main #content .view .view-content li{
+	list-style: none;
+}
+
+.page-en-events #main #content .view .views-row{
+	border-bottom: 1px solid #D2D2D2;
+}
+
+*/
+
+.views-exposed-form-all-bibliographies-page{
+	   margin: 0;
+    padding: 0;
+    width: 272px;
+}
+
+div.view-all-bibliographies .feed-icon a:before {
+    content: "Download results as Excel (.xls) file ";
+}
+
+div.view-all-bibliographies .feed-icon {
+    margin-top: 3em;
+}
+
+#main-sidebar{
+	float: left;
+    width: 300px;
+}
+
+#for-links{
+    position: absolute;
+    right: 0;
+    width: 123px;
+    top: 60px;
+}
+
+#for-links li{
+    list-style: none outside none;	
+    float: left;
+}
+
+#for-links li:first-child{
+    border-right: 1px solid #C2C2C2;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+/* NBSAPs pages */
+
+.view-b .field-content img {
+	float: right; 
+	margin: 0 0 20px 20px;
+}
+
+.view-b h3, .view-b h4 {
+	clear:both;
+	margin-top: 2em;
+}
+
+/* video slideshow */
+
+#views_slideshow_cycle_main_video_pages-block .video-embed-description {
+	font-size: 16px;
+}
+
+.views-slideshow-pager-field-item {
+	cursor: pointer;
+	float: left;
+	height: 204px;
+	margin: 20px 20px 10px 0;
+	width: 180px;
+}
+
+.view-id-video_gallery .views-slideshow-controls-bottom .active {
+	zoom: 1;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.views-slideshow-pager-field-item.views_slideshow_pager_field_item:hover {
+	background:#f9f9f9;
+}
+
+.video-left {
+	float: left; 
+	margin: 0 20px 20px 0;
+}
+
+/* footer */
+
+#block-boxes-sponsors .nfooter img.iied {
+	float:right; 
+}
+
+.column-1 {
+	float: left;
+	width: 300px;
+	padding: 5px 20px 5px 5px;
+}
+
+.column-2 {
+	border-left: 1px dotted #92C846;
+	border-right: 1px dotted #92C846;
+	float:left;
+	width: 300px;
+	padding: 5px 20px;
+}
+
+.column-3 {
+	background-image:url(footer-bcgrnd.png) no-repeat; 
+	float:left;
+	width: 300px;
+	padding: 5px 5px 5px 20px;
+}
+
+#sponsors h2 {
+    color: #92C846;
+	font-size: 1.5em;
+	font-weight: normal;
+}
+
+#sponsors a {
+    font-size: 1.1em;
+}
+
+#sponsors li.policy {
+	float: left;
+	margin-right: 120px;
+}
+#sponsors ul {
+	list-style-type: none;
+}
+
+/******************************
+ Homepage specific
+******************************/
+
+#block-block-10 {
+	float:left;
+	margin-right: 45px;
+	max-width:270px;
+}
+
+#block-block-11 {
+	float:left;
+	max-width:270px;
+}
+
+#block-block-12 {
+	float:left;
+	max-width:270px;
+}
+
+#block-block-12 h2.block-title, #block-block-23 h2.block-title {
+    font-size: 1.875em;
+    line-height: 26px;
+}
+
+#block-block-23 h4 {
+	margin-top: 1.7em;
+}
+
+#block-views-latest_news-block_1 {
+	margin-right: 20px;
+}
+
+#block-views-latest_news-block_1 ul li {
+ 	border-bottom: 1px dotted #92C846;
+    margin:0px !important;
+    padding: 7px 0;
+}
+/*
+#block-aggregator-feed-1 {
+	float:left;
+	max-width:270px;
+}
+
+#block-aggregator-feed-1 ul li{
+	border-bottom: 1px dotted #399C53;
+    min-height: 3em;
+    padding: 10px 0;
+}
+*/
+#block-views-iied_rss-block {
+	float:left;
+	max-width:270px;
+}
+
+#block-views-iied_rss-block ul li{
+	border-bottom: 1px dotted #92C846;
+    margin:0px !important;
+	min-height: 4em;
+    padding: 10px 0;
+}
+
+#home-content-1 {
+	margin-bottom: 0;
+    min-height: 300px;
+    padding-bottom: 10px;
+}
+
+#home-content-2 {
+	margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.front #sidebar-first {
+	margin-bottom: 40px;
+	min-height:300px;
+}
+
+.front #sidebar-second {
+	
+}
+#home3 {
+    width: 900px;
+}
+
+
+#home-content-2 #block-block-41 {
+	clear:both;
+}
+
+#home3:after {
+	clear:both
+}
+
+#col1, #col2 {
+	float: left;
+    margin-right: 45px;
+    width: 270px;
+}
+
+#col3{
+	float: left;
+    width: 270px;
+}
+
+
+
+/*
+.front #main {
+    margin-top: 20px;
+}
+*/
+
+#block-block-6 {
+	float:right;
+}
+
+.more-arrow {
+	font-size:10px;
+}
+
+.view-iied-rss .views-row {
+	border-bottom: 1px solid #CCCCCC;
+	    margin-bottom: 1em; 
+		padding-bottom: 1em;
+}
+
+.view-latest-news .views-row h3 {
+    margin-bottom: 0;
+	margin-top: 0.5em;
+}
+
+.view-latest-news .views-row {
+    border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+}
+
+/* biodiversity-poverty evidence database */
+
+div.view-bio-pov-search table.views-table, #block-views--exp-bio_pov_search-page_1, .view-newsletter-archives table.views-table {
+    width: 148%;
+}
+
+div.view-bio-pov-search .feed-icon {
+    float: right;
+	margin-top: 2em;
+}
+
+div.view-bio-pov-search .feed-icon a:before {
+    content: "Download results as Excel (.xls) file ";
+}
+
+.node-bp-paper .field-name-body p {
+	font-size: 15px; 	
+}
+
+.view-bio-pov-search .view-header {
+	width: 148%;
+}
+
+
+.sidebar-first .block {
+	margin-bottom: 30px;
+}
+
+/* test pclg publications page (remove this set) */
+
+#node-8984 .pubitem span {
+    display: none;
+}
+
+#node-8984 .pubitem img {
+    float: left;
+    margin-bottom: 0.5em;
+    margin-right: 20px;
+    max-width: 75px;
+}
+
+#node-8984 .pubitem {
+    border-top: 1px solid #e4e4e4;
+    clear: both;
+    padding: 0.5em;
+}
+
+#node-8984 .pubitem a {
+    font-family: Georgia,"Times New Roman",Times,serif;
+    line-height: 1.3em;
+    font-size: 1.2em;
+     font-style: normal;
+    font-weight: normal;
+    margin-bottom: 1 em;
+}
+
+/* pclg publications page */
+
+.view-publications-feed tr.even, .view-publications-feed tr.odd {
+    background-color: #ffffff;
+}
+
+.view-publications-feed .views-field-field-cover-image {
+    padding: 0 20px 0 0;
+}
+
+.view-publications-feed .views-row-first {
+    border-top: 4px solid #e4e4e4;
+}
+
+.view-publications-feed .author-date {
+    color: #696969;
+}
+
+/* organisations pages */
+
+#node_organisations_full_group_contacts .fieldset-legend, #node_intiative_full_group_details .fieldset-legend, #node_bibliography_full_group_details .fieldset-legend {
+    display: none;
+}
+
+.cont-in {
+    margin-left: 5.6em;
+}
+
+#node_organisations_full_group_contacts fieldset {
+    margin-top: 3em;
+}
+fieldset.group-details, fieldset.group-contacts {
+    border: 1px solid #ccc;
+} 
+
+.view-all-organisations .views-row, .view-all-initiatives .views-row, .view-all-bibliographies .views-row, .view-all-events .views-row, .view-all-meeting-and-events .views-row {
+    border-bottom: 1px solid #e4e4e4;
+    margin: 1em 0;
+}
+
+/* accordion */
+#jquery-ui-filter .ui-accordion-header a {
+    color: #ffffff; /* was #4c78fa */
+    /*background: #92C846;*/
+}
+
+.jquery-ui-filter-accordion-header {
+    background-color: #92C846 !important;
+}
+
+.jquery-ui-filter-accordion .ui-state-default .ui-icon, .jquery-ui-filter-accordion .ui-state-active .ui-icon {
+    background-image: url("/sites/default/files/plusminus.png");
+}
+
+.ui-accordion-header .ui-icon-triangle-1-e {
+    background-position: 0px 0px;
+}
+
+.ui-accordion-header .ui-icon-triangle-1-s {
+    background-position: 0px -16px;
+}
+
+/* accordion overrides for uganda resources */
+
+.page-node-9233 .jquery-ui-filter .ui-accordion-header a, .page-node-9233 #jquery-ui-filter .ui-accordion-header a {
+    color: #4C78FA;
+    font-weight: normal;
+}
+
+.page-node-9233 .jquery-ui-filter-accordion-header {
+    background-color: #ffffff !important;
+}
+
+.page-node-9233 .jquery-ui-filter .ui-state-hover, .page-node-9233 #jquery-ui-filter .ui-state-focus, .page-node-9233 #jquery-ui-filter .ui-state-hover, .page-node-9233 #jquery-ui-filter .ui-state-focus {
+    background:#ffffff !important;
+}
+
+.page-node-9233 .ui-state-default {
+    border: 0;
+    background: #ffffff;
+}
+
+.page-node-9233 .jquery-ui-filter {
+    border: 0;
+    border-bottom: 2px solid #92C846;
+    margin-bottom: 2em;
+}
+
+.page-node-9233 .ui-accordion .ui-accordion-content {
+    padding: 1em 2.2em 3em 2.2em;
+}
+
+.page-node-9233 .ui-widget-content {
+    border:0;
+}
+
+
+/* U-PCLG */
+
+td.u-pclg-members {
+    padding: 25px 25px 25px 0;
+}
+
+#block-menu-menu-uganda-pclg {
+    background-image: url("/sites/default/files/uganda-background2.jpg");
+    height: 214px;
+    width: 990px;
+}
+
+#block-menu-menu-uganda-pclg ul.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 10px;
+    left: 40px;
+    width: 100%;    
+}
+
+#block-menu-menu-uganda-pclg ul.menu li a {
+    float: left;
+    text-decoration: none;
+    color: white;
+    padding: 0.2em 1.6em;
+    border-right: 1px solid white;
+}
+
+
+#block-menu-menu-uganda-pclg li {
+    display: inline;
+}
