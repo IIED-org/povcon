@@ -7,9 +7,9 @@ package = Clientside Validation
 files[] = clientside_validation_form.module
 dependencies[] = clientside_validation
 
-; Information added by drupal.org packaging script on 2011-11-29
-version = "7.x-1.25"
+; Information added by Drupal.org packaging script on 2016-10-14
+version = "7.x-1.44"
 core = "7.x"
 project = "clientside_validation"
-datestamp = "1322567138"
+datestamp = "1476439457"
 
