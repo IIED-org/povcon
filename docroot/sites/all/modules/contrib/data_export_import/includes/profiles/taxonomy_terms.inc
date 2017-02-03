@@ -360,12 +360,12 @@ function data_export_import_import_taxonomy_terms($file) {
     unset($existing_vocabulary->nodes);
 
     // Check the vocabularies actually match.
-   // if ($vocabulary_from_file != $existing_vocabulary) {
+    if ($vocabulary_from_file != $existing_vocabulary) {
 
-     // drupal_set_message(t('There is a mismatch between the vocabularies in the dataset file and the current vocabularies - vocabulary name: %vocabular_name', array('%vocabular_name' => $vocabulary_from_file->name)), 'error');
+      drupal_set_message(t('There is a mismatch between the vocabularies in the dataset file and the current vocabularies - vocabulary name: %vocabular_name', array('%vocabular_name' => $vocabulary_from_file->name)), 'error');
 
-     // return FALSE;
-   // }
+      return FALSE;
+    }
   }
 
   // Here we will loop through the vocabulary terms in the receiving

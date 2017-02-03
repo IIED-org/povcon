@@ -15,7 +15,8 @@ function ccl_schema() {
         'description' => 'The primary identifier for a link.',
         'type' => 'serial',
         'unsigned' => TRUE,
-        'not null' => TRUE
+        'no export' => TRUE,
+        'not null' => TRUE,
       ),
       'type' => array(
         'description' => 'The type the link will target.',
@@ -68,8 +69,11 @@ function ccl_update_7101() {
   }
 }
 
+/**
+ * Adjust table for modular plugin system.
+ */
 function ccl_update_7102() {
-  // First add new options field
+  // First add new options field.
   $options_field = array(
     'description' => 'The options for this specific link.',
     'type' => 'blob',
@@ -89,7 +93,7 @@ function ccl_update_7102() {
       'node_type' => '',
       'node_id' => '',
       'block_global' => '',
-      'block_select' => ''
+      'block_select' => '',
     );
 
     if ($row->type == 'block' && $row->global) {

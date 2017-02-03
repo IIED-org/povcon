@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Implments support for CCL on blocks.
+ */
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -6,7 +10,7 @@
  * Add additional form elements to the main CCL add/edit form.
  */
 function ccl_blocks_form_ccl_add_form_alter(&$form, &$form_state, $form_id) {
-  // Check if we are in edit mode
+  // Check if we are in edit mode.
   if (isset($form_state['clid'])) {
     $clid = $form_state['clid'];
     $link = $form_state['link'];
@@ -18,7 +22,8 @@ function ccl_blocks_form_ccl_add_form_alter(&$form, &$form_state, $form_id) {
   // Add blocks as an option for links.
   $form['options_group']['ccl_type']['#options']['block'] = t('Block');
 
-  // Follow the naming conventions outlined here in order to avoid nameing conflicts.
+  // Follow the naming conventions outlined here
+  // in order to avoid naming conflicts.
   $form['options_group']['block_global'] = array(
     '#type' => 'checkbox',
     '#title' => t('Add this link to all blocks'),
@@ -33,8 +38,10 @@ function ccl_blocks_form_ccl_add_form_alter(&$form, &$form_state, $form_id) {
   $options = _ccl_blocks_get_info();
   $form['options_group']['block_select'] = array(
     '#type' => 'select',
-    '#title' => t('Block'),
-    '#description' => t('Seletc the block this link should be added to.'),
+    '#multiple' => TRUE,
+    '#size' => min(12, count($options)),
+    '#title' => t('Blocks'),
+    '#description' => t('Select the block(s) this link should be added to.'),
     '#options' => $options,
     '#default_value' => ($clid && isset($link->options['block_select'])) ? $link->options['block_select'] : -1,
     '#states' => array(
@@ -45,40 +52,40 @@ function ccl_blocks_form_ccl_add_form_alter(&$form, &$form_state, $form_id) {
     ),
   );
 
-  // Add validation for blocks
+  // Add validation for blocks.
   $form['#validate'][] = "ccl_blocks_validation";
 
 }
 
 /**
- * Custom validation for the block options
+ * Custom validation for the block options.
  */
 function ccl_blocks_validation($form, &$form_state) {
   $values = $form_state['values'];
 
-  // Check that the node id token is not used for blocks
+  // Check that the node id token is not used for blocks.
   if ($values['ccl_type'] == 'block' && strpos($values['ccl_link'], '[node:') !== FALSE) {
     form_set_error('ccl_link', t('Node tokens are not processed for links added to blocks.'));
   }
 }
 
 /**
- * Hook function to process the contextual links element
+ * Hook function to process the contextual links element.
  */
 function ccl_blocks_ccl_add_link($element, $dest) {
-  // Check if it is a block
+  // Check if it is a block.
   if (isset($element['#element']['#block']->delta)) {
     $bid = $element['#element']['#block']->module . '|' . $element['#element']['#block']->delta;
     $block_cache = ccl_cache_get('ccl_blocks');
 
-    // Global Blocks
+    // Global Blocks.
     foreach ($block_cache['global'] as $id => $link) {
       if ($processed_link = _ccl_prepare_link($link, $dest)) {
         $element['#links']['ccl-global-block-' . $id] = $processed_link;
       }
     }
 
-    // Individual blocks
+    // Individual blocks.
     if (in_array($bid, array_keys($block_cache['ids']))) {
       foreach ($block_cache['ids'][$bid] as $id => $link) {
         if ($processed_link = _ccl_prepare_link($link, $dest)) {
@@ -91,6 +98,8 @@ function ccl_blocks_ccl_add_link($element, $dest) {
 }
 
 /**
+ * Implements hook_ccl_cache_update().
+ *
  * Hook function triggered by the chache update routine of the main module.
  */
 function ccl_blocks_ccl_cache_update() {
@@ -98,11 +107,30 @@ function ccl_blocks_ccl_cache_update() {
   $block_cache = array('global' => array(), 'ids' => array());
   foreach ($blocks as $block) {
     $block->options = unserialize($block->options);
+    $advanced = array();
+    if (isset($block->options['advanced_css'])) {
+      $advanced['class'] = $block->options['advanced_css'];
+    }
+    if (isset($block->options['advanced_query'])) {
+      $advanced['query'] = $block->options['advanced_query'];
+    }
+
     if ($block->options['block_global']) {
-      $block_cache['global'][] = array('title' => $block->title, 'href' => $block->link);
+      $block_cache['global'][] = array(
+        'title' => $block->title,
+        'href' => $block->link,
+        'advanced' => $advanced,
+      );
     }
     else {
-      $block_cache['ids'][$block->options['block_select']][] = array('title' => $block->title, 'href' => $block->link);
+      // Create an entry for each selected block.
+      foreach ($block->options['block_select'] as $id) {
+        $block_cache['ids'][$id][] = array(
+          'title' => $block->title,
+          'href' => $block->link,
+          'advanced' => $advanced,
+        );
+      }
     }
   }
   cache_set('ccl_blocks', $block_cache);
@@ -114,7 +142,8 @@ function ccl_blocks_ccl_cache_update() {
 function _ccl_blocks_get_info() {
   $block_info = cache_get('ccl_blocks_info');
 
-  // If no data is found in the cache invoke all block hooks and create the cache entry
+  // If no data is found in the cache invoke all block hooks
+  // and create the cache entry.
   if (empty($block_info)) {
     $block_info = array();
     foreach (module_implements('block_info') as $module) {
@@ -129,6 +158,9 @@ function _ccl_blocks_get_info() {
         }
       }
     }
+    // Unset unsupported blocks.
+    unset($block_info['system|main']);
+    unset($block_info['system|help']);
     cache_set('ccl_blocks_info', $block_info);
   }
 
@@ -147,7 +179,7 @@ function ccl_blocks_ccl_link_info($record) {
   if ($record->type == 'block') {
     $options_return = array(
       'desc' => '',
-      'op' => l(t('Edit'), 'admin/config/user-interface/ccl/' . $record->clid . '/edit') . ' | ' . l(t('Delete'), 'admin/config/user-interface/ccl/' . $record->clid . '/delete')
+      'op' => l(t('Edit'), 'admin/config/user-interface/ccl/' . $record->clid . '/edit') . ' | ' . l(t('Delete'), 'admin/config/user-interface/ccl/' . $record->clid . '/delete'),
     );
 
     $options = unserialize($record->options);
@@ -157,7 +189,15 @@ function ccl_blocks_ccl_link_info($record) {
     }
     else {
       $blocks = _ccl_blocks_get_info();
-      $options_return['desc'] = t('Attached to the %block block.', array('%block' => $blocks[$options['block_select']]));
+
+      $options_return['desc'] = format_plural(
+        count($options['block_select']),
+        'Attached to block: %block',
+        'Attached to blocks: %block',
+        array(
+          '%block' => implode(', ', array_intersect_key($blocks, $options['block_select'])),
+        )
+      );
     }
     return $options_return;
   }

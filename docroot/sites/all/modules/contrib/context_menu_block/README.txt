@@ -43,12 +43,6 @@ configuration.
 
 [1] http://drupal.org/node/895232
 
-CONTACT
--------
-
-Current maintainer:
-- Mark Trapp (amorfati) - http://drupal.org/user/212019
-
 ACKNOWLEDGEMENTS
 ----------------
 
