@@ -1,6 +1,7 @@
 
 /**
  * @file
+ * getlocations_fields_formatter.js
  * @author Bob Hutchinson http://drupal.org/user/52366
  * @copyright GNU GPL
  *
@@ -192,7 +193,209 @@
         }
       });
 
+      if ($("input[id$=pancontrol]").attr('checked')) {
+        $("#wrap-getlocations-pancontrol").show();
+      }
+      else {
+        $("#wrap-getlocations-pancontrol").hide();
+      }
+      $("input[id$=pancontrol]").change(function() {
+        if ($(this).attr('checked')) {
+          $("#wrap-getlocations-pancontrol").show();
+        }
+        else {
+          $("#wrap-getlocations-pancontrol").hide();
+        }
+      });
+
+      if ($("select[id$=controltype]").val() == 'none') {
+        $("#wrap-getlocations-zoomcontrol").hide();
+      }
+      else {
+        $("#wrap-getlocations-zoomcontrol").show();
+      }
+      $("select[id$=controltype]").change(function() {
+        if ($(this).val() == 'none') {
+          $("#wrap-getlocations-zoomcontrol").hide();
+        }
+        else {
+          $("#wrap-getlocations-zoomcontrol").show();
+        }
+      });
+
+      if ($("select[id$=mtc]").val() == 'none') {
+        $("#wrap-getlocations-mapcontrol").hide();
+      }
+      else {
+        $("#wrap-getlocations-mapcontrol").show();
+      }
+      $("select[id$=mtc]").change(function() {
+        if ($(this).val() == 'none') {
+          $("#wrap-getlocations-mapcontrol").hide();
+        }
+        else {
+          $("#wrap-getlocations-mapcontrol").show();
+        }
+      });
+
+      if ($("input[id$=scale]").attr('checked')) {
+        $("#wrap-getlocations-scale").show();
+      }
+      else {
+        $("#wrap-getlocations-scale").hide();
+      }
+      $("input[id$=scale]").change(function() {
+        if ($(this).attr('checked')) {
+          $("#wrap-getlocations-scale").show();
+        }
+        else {
+          $("#wrap-getlocations-scale").hide();
+        }
+      });
+
+      if ($("input[id$=overview]").attr('checked')) {
+        $("#wrap-getlocations-overview").show();
+      }
+      else {
+        $("#wrap-getlocations-overview").hide();
+      }
+      $("input[id$=overview]").change(function() {
+        if ($(this).attr('checked')) {
+          $("#wrap-getlocations-overview").show();
+        }
+        else {
+          $("#wrap-getlocations-overview").hide();
+        }
+      });
+
+      if ($("input[id$=sv-show]").attr('checked')) {
+        $("#wrap-getlocations-sv-show").show();
+      }
+      else {
+        $("#wrap-getlocations-sv-show").hide();
+      }
+      $("input[id$=sv-show]").change(function() {
+        if ($(this).attr('checked')) {
+          $("#wrap-getlocations-sv-show").show();
+        }
+        else {
+          $("#wrap-getlocations-sv-show").hide();
+        }
+      });
+
+      if ($("input[id$=fullscreen]").attr('checked')) {
+        $("#wrap-getlocations-fs-show").show();
+      }
+      else {
+        $("#wrap-getlocations-fs-show").hide();
+      }
+      $("input[id$=fullscreen]").change(function() {
+        if ($(this).attr('checked')) {
+          $("#wrap-getlocations-fs-show").show();
+        }
+        else {
+          $("#wrap-getlocations-fs-show").hide();
+        }
+      });
+
+      // streetview overlay settings
+      if ($("input[id$=sv-addresscontrol]").attr('checked')) {
+        $("#wrap-getlocations-sv-addresscontrol").show();
+      }
+      else {
+        $("#wrap-getlocations-sv-addresscontrol").hide();
+      }
+      $("input[id$=sv-addresscontrol]").change(function() {
+        if ($(this).attr('checked')) {
+          $("#wrap-getlocations-sv-addresscontrol").show();
+        }
+        else {
+          $("#wrap-getlocations-sv-addresscontrol").hide();
+        }
+      });
+      if ($("input[id$=sv-pancontrol]").attr('checked')) {
+        $("#wrap-getlocations-sv-pancontrol").show();
+      }
+      else {
+        $("#wrap-getlocations-sv-pancontrol").hide();
+      }
+      $("input[id$=sv-pancontrol]").change(function() {
+        if ($(this).attr('checked')) {
+          $("#wrap-getlocations-sv-pancontrol").show();
+        }
+        else {
+          $("#wrap-getlocations-sv-pancontrol").hide();
+        }
+      });
+      if ($("select[id$=sv-zoomcontrol]").val() == 'none') {
+        $("#wrap-getlocations-sv-zoomcontrol").hide();
+      }
+      else {
+        $("#wrap-getlocations-sv-zoomcontrol").show();
+      }
+      $("select[id$=sv-zoomcontrol]").change(function() {
+        if ($(this).val() == 'none') {
+          $("#wrap-getlocations-sv-zoomcontrol").hide();
+        }
+        else {
+          $("#wrap-getlocations-sv-zoomcontrol").show();
+        }
+      });
+
+      if ($("input[id$=highlight-enable]").attr('checked')) {
+        $("#wrap-getlocations-highlight").show();
+      }
+      else {
+        $("#wrap-getlocations-highlight").hide();
+      }
+      $("input[id$=highlight-enable]").change(function() {
+        if ($(this).attr('checked')) {
+          $("#wrap-getlocations-highlight").show();
+        }
+        else {
+          $("#wrap-getlocations-highlight").hide();
+        }
+      });
+
+      // search marker
+      if ($("input[id$=views-search-marker-enable]").is('input')) {
+        if ( $("input[id$=views-search-marker-enable]").attr('checked')) {
+          $("#wrap-getlocations-views-search-marker").show();
+        }
+        else {
+          $("#wrap-getlocations-views-search-marker").hide();
+        }
+        $("input[id$=views-search-marker-enable]").change(function() {
+          if ($(this).attr('checked')) {
+            $("#wrap-getlocations-views-search-marker").show();
+          }
+          else {
+            $("#wrap-getlocations-views-search-marker").hide();
+          }
+        });
+      }
+
+      // search area shape
+      if ($("input[id$=views-search-radshape-enable]").is('input')) {
+        if ($("input[id$=views-search-radshape-enable]").attr('checked')) {
+          $("#wrap-getlocations-views-search-radshape").show();
+        }
+        else {
+          $("#wrap-getlocations-views-search-radshape").hide();
+        }
+        $("input[id$=views-search-radshape-enable]").change(function() {
+          if ($(this).attr('checked')) {
+            $("#wrap-getlocations-views-search-radshape").show();
+          }
+          else {
+            $("#wrap-getlocations-views-search-radshape").hide();
+          }
+        });
+      }
+////////
+
+
+////////
     }
   };
-}(jQuery));
-
+})(jQuery);

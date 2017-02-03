@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * getlocations.views_default.inc
  * @author Bob Hutchinson http://drupal.org/user/52366
  * @copyright GNU GPL
  *
@@ -75,6 +76,7 @@ function getlocations_views_default_views() {
     $handler->display->display_options['fields']['nid']['alter']['text'] = 'View [title] on a map';
     $handler->display->display_options['fields']['nid']['alter']['make_link'] = 1;
     $handler->display->display_options['fields']['nid']['alter']['path'] = 'getlocations/node/[nid]';
+    $handler->display->display_options['fields']['nid']['alter']['alt'] = 'View on a map';
     $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['external'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['replace_spaces'] = 0;
@@ -1021,6 +1023,7 @@ function getlocations_views_default_views() {
     $handler->display->display_options['fields']['nid']['alter']['text'] = 'View [title] on a map';
     $handler->display->display_options['fields']['nid']['alter']['make_link'] = 1;
     $handler->display->display_options['fields']['nid']['alter']['path'] = 'getlocations/node/[nid]';
+    $handler->display->display_options['fields']['nid']['alter']['alt'] = 'View on a map';
     $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['external'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['replace_spaces'] = 0;
@@ -1188,6 +1191,7 @@ function getlocations_views_default_views() {
     $handler->display->display_options['fields']['nid']['alter']['text'] = 'View [title] on a map';
     $handler->display->display_options['fields']['nid']['alter']['make_link'] = 1;
     $handler->display->display_options['fields']['nid']['alter']['path'] = 'getlocations/node/[nid]';
+    $handler->display->display_options['fields']['nid']['alter']['alt'] = 'View on a map';
     $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['external'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['replace_spaces'] = 0;
@@ -1269,6 +1273,7 @@ function getlocations_views_default_views() {
     $handler->display->display_options['fields']['nid']['alter']['text'] = 'View [title] on a map';
     $handler->display->display_options['fields']['nid']['alter']['make_link'] = 1;
     $handler->display->display_options['fields']['nid']['alter']['path'] = 'getlocations/node/[nid]';
+    $handler->display->display_options['fields']['nid']['alter']['alt'] = 'View on a map';
     $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['external'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['replace_spaces'] = 0;
@@ -1436,6 +1441,7 @@ function getlocations_views_default_views() {
     $handler->display->display_options['fields']['nid']['alter']['text'] = 'View [title] on a map';
     $handler->display->display_options['fields']['nid']['alter']['make_link'] = 1;
     $handler->display->display_options['fields']['nid']['alter']['path'] = 'getlocations/node/[nid]';
+    $handler->display->display_options['fields']['nid']['alter']['alt'] = 'View on a map';
     $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['external'] = 0;
     $handler->display->display_options['fields']['nid']['alter']['replace_spaces'] = 0;

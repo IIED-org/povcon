@@ -55,7 +55,7 @@ function jquery_ui_filter_update_7002() {
   module_enable( array('jquery_ui_filter_accordion', 'jquery_ui_filter_dialog', 'jquery_ui_filter_tabs') );
 
   // Update filters
-  db_query("UPDATE {filters} SET module='jquery_ui_filter_accordion', name='accordion' WHERE module='jquery_ui_filter' AND name='accordion'");
-  db_query("UPDATE {filters} SET module='jquery_ui_filter_dialog', name='dialog'  WHERE module='jquery_ui_filter' AND name='dialog'");
-  db_query("UPDATE {filters} SET module='jquery_ui_filter_tabs', name='tabs'  WHERE module='jquery_ui_filter' AND name='tabs'");
+  db_query("UPDATE {filter} SET module='jquery_ui_filter_accordion', name='accordion' WHERE module='jquery_ui_filter' AND name='accordion'");
+  db_query("UPDATE {filter} SET module='jquery_ui_filter_dialog', name='dialog'  WHERE module='jquery_ui_filter' AND name='dialog'");
+  db_query("UPDATE {filter} SET module='jquery_ui_filter_tabs', name='tabs'  WHERE module='jquery_ui_filter' AND name='tabs'");
 }

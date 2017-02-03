@@ -9,7 +9,7 @@
  * Implements hook_init().
  */
 function jquery_ui_filter_init() {
-  drupal_add_library('system', 'ui.widget', TRUE);
+  drupal_add_library('system', 'ui.widget');
 
   // Add jQuery UI filter script and settings.
   // NOTE: Still including jQuery UI filter javascript even if it is disabled

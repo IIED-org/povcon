@@ -1,6 +1,7 @@
 
 /**
  * @file
+ * getlocations_rectangles.js
  * @author Bob Hutchinson http://drupal.org/user/52366
  * @copyright GNU GPL
  *
@@ -10,6 +11,11 @@
 (function ($) {
   Drupal.behaviors.getlocations_rectangles = {
     attach: function() {
+
+      // bail out
+      if (typeof Drupal.settings.getlocations_rectangles === 'undefined') {
+        return;
+      }
 
       var default_rectangle_settings = {
         strokeColor: '#FF0000',
@@ -22,13 +28,13 @@
       $.each(Drupal.settings.getlocations_rectangles, function (key, settings) {
 
         var strokeColor = (settings.strokeColor ? settings.strokeColor : default_rectangle_settings.strokeColor);
-        if (typeof strokeColor.match("/^#/") === null) {
+        if (! strokeColor.match(/^#/)) {
           strokeColor = '#' + strokeColor;
         }
         var strokeOpacity = (settings.strokeOpacity ? settings.strokeOpacity : default_rectangle_settings.strokeOpacity);
         var strokeWeight = (settings.strokeWeight ? settings.strokeWeight : default_rectangle_settings.strokeWeight);
         var fillColor = (settings.fillColor ? settings.fillColor : default_rectangle_settings.fillColor);
-        if (typeof fillColor.match("/^#/") === null) {
+        if (! fillColor.match(/^#/)) {
           fillColor = '#' + fillColor;
         }
         var fillOpacity = (settings.fillOpacity ? settings.fillOpacity : default_rectangle_settings.fillOpacity);
@@ -48,7 +54,7 @@
           rc = rectangles[i];
           if (rc.coords) {
             if (rc.strokeColor) {
-              if (typeof rc.strokeColor.match("/^#/") === null) {
+              if (! rc.strokeColor.match(/^#/)) {
                 rc.strokeColor = '#' + rc.strokeColor;
               }
               p_strokeColor = rc.strokeColor;
@@ -60,7 +66,7 @@
               p_strokeWeight = rc.strokeWeight;
             }
             if (rc.fillColor) {
-              if (typeof rc.fillColor.match("/^#/") === null) {
+              if (! rc.fillColor.match(/^#/)) {
                 rc.fillColor = '#' + rc.fillColor;
               }
               p_fillColor = rc.fillColor;
@@ -92,18 +98,18 @@
               rectOpts.fillColor = p_fillColor;
               rectOpts.fillOpacity = p_fillOpacity;
               rectOpts.clickable = p_clickable;
-              rectOpts.map = getlocations_map[key];
+              rectOpts.map = Drupal.getlocations_map[key];
               rect[i] = new google.maps.Rectangle(rectOpts);
 
               if (p_clickable && p_message) {
                 google.maps.event.addListener(rect[i], 'click', function(event) {
                   // close any previous instances
                   if (pushit) {
-                    for (var i in getlocations_settings[key].infoBubbles) {
-                      getlocations_settings[key].infoBubbles[i].close();
+                    for (var i in Drupal.getlocations_settings[key].infoBubbles) {
+                      Drupal.getlocations_settings[key].infoBubbles[i].close();
                     }
                   }
-                  if (getlocations_settings[key].markeraction == 2) {
+                  if (Drupal.getlocations_settings[key].markeraction == 2) {
                     // infobubble
                     if (typeof(infoBubbleOptions) == 'object') {
                       var infoBubbleOpts = infoBubbleOptions;
@@ -127,9 +133,9 @@
                     infoWindowOpts.position = event.latLng;
                     var iw = new google.maps.InfoWindow(infoWindowOpts);
                   }
-                  iw.open(getlocations_map[key]);
+                  iw.open(Drupal.getlocations_map[key]);
                   if (pushit) {
-                    getlocations_settings[key].infoBubbles.push(iw);
+                    Drupal.getlocations_settings[key].infoBubbles.push(iw);
                   }
                 });
               }
@@ -139,5 +145,4 @@
       });
     }
   };
-}(jQuery));
-
+})(jQuery);

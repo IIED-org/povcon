@@ -15,16 +15,16 @@ function jquery_ui_filter_dialog_init() {
   drupal_add_css( drupal_get_path('module', 'jquery_ui_filter_dialog') . '/jquery_ui_filter_dialog.css');
 
   // Add dialog
-  drupal_add_library('system', 'ui.dialog', TRUE);
+  drupal_add_library('system', 'ui.dialog');
   if (isset($dialog_options['resizable']) && $dialog_options['resizable'] == 'true') {
-    drupal_add_library('system', 'ui.resizable', TRUE);
+    drupal_add_library('system', 'ui.resizable');
   }
   if (isset($dialog_options['draggable']) && $dialog_options['draggable'] == 'true') {
-    drupal_add_library('system', 'ui.draggable', TRUE);
+    drupal_add_library('system', 'ui.draggable');
   }
 
   // Add script and settings.
-  drupal_add_js( drupal_get_path('module', 'jquery_ui_filter_dialog') . '/jquery_ui_filter_dialog.js', array('type' => 'file', 'every_page' => TRUE));
+  drupal_add_js( drupal_get_path('module', 'jquery_ui_filter_dialog') . '/jquery_ui_filter_dialog.js', array('type' => 'file'));
   $settings = array(
     'jQueryUiFilter' => array(
       'dialogWhitelist' => variable_get('jquery_ui_filter_dialog_whitelist', ''),
@@ -99,6 +99,13 @@ function _jquery_ui_filter_dialog_tips_callback($delta = NULL, $format = NULL, $
     '@dialog_href' => 'http://jqueryui.com/demos/dialog/',
   );
   return t('To open a link inside a jQuery UI <a href="@dialog_href">Dialog</a> set the link\'s the target attribute to [dialog] with optional JSON data, with single or double quotes, included in the \'rel\' attribute.', $t_args);
+}
+
+/**
+ * Jquery UI filter dialog settings.
+ */
+function _jquery_ui_filter_dialog_settings_callback() {
+  return _jquery_ui_filter_settings_callback('dialog');
 }
 
 /**

@@ -1,11 +1,13 @@
 <?php
 
 /**
- * @file getlocations_marker_box.tpl.php
+ * @file
+ * getlocations_marker_box.tpl.php
  * @author Bob Hutchinson http://drupal.org/user/52366
  * @copyright GNU GPL
  *
  * Template file for colorbox implementation
+ * @ingroup themeable
  */
 
 ?>
@@ -38,24 +40,21 @@
   }
 </style>
 <?php
-  if (isset($content['cat'])) {
-    if ($content['cat'] == 'n') {
-      $title = t('Getlocations Node marker');
-    }
-    elseif ($content['cat'] == 'u') {
-      $title = t('Getlocations User marker');
-    }
-    elseif ($content['cat'] == 'v') {
-      $title = t('Getlocations Vocabulary marker');
-    }
-    elseif ($content['cat'] == 'c') {
-      $title = t('Getlocations Comment marker');
-    }
-    elseif ($content['cat'] == 'i') {
-      $title = t('Getlocations Input marker');
-    }
+  $title = t('Getlocations marker');
+  $titles = array(
+    'n' => t('Getlocations Node marker'),
+    'u' => t('Getlocations User marker'),
+    'v' => t('Getlocations Vocabulary marker'),
+    'c' => t('Getlocations Comment marker'),
+    'i' => t('Getlocations Input marker'),
+    'g' => t('Getlocations GPS marker'),
+    'm' => t('Getlocations Smartip marker'),
+    's' => t('Getlocations Search marker'),
+    't' => t('Getlocations Term marker'),
+  );
+  if (isset($content['cat']) && isset($titles[$content['cat']])) {
+    $title = $titles[$content['cat']];
   }
-
 ?>
 </head>
 

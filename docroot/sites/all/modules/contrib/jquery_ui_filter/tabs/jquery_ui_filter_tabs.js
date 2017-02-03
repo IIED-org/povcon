@@ -43,11 +43,16 @@ Drupal.jQueryUiFilter.tabsPaging = function(selector, options) {
   });
 
   // Init buttons
-  $tabs.find('button.ui-tabs-prev, button.ui-tabs-next,').button();
+  $tabs.find('button.ui-tabs-prev, button.ui-tabs-next').button();
 
   // Add event handler
   $tabs.find('.ui-tabs-next, .ui-tabs-prev').click(function() {
-    $tabs.tabs('select', parseInt($(this).attr("rel")));
+    if ($.ui.version == '1.8.7') {
+      $tabs.tabs('select', parseInt($(this).attr("rel")));
+    }
+    else {
+      $tabs.tabs('option', 'active', parseInt($(this).attr("rel")));
+    }
     return false;
   });
 }
@@ -89,8 +94,15 @@ Drupal.jQueryUiFilter.tabsHashChangeEvent = function() {
 
   var selected = $tab.prevAll().length;
 
-  if ($tabs.tabs('option', 'selected') != selected) {
-    $tabs.tabs('select', selected);
+  if ($.ui.version == '1.8.7') {
+    if ($tabs.tabs('option', 'selected') != selected) {
+      $tabs.tabs('select', selected);
+    }
+  }
+  else {
+    if ($tabs.tabs('option', 'active') != selected) {
+      $tabs.tabs('option', 'active', selected);
+    }
   }
 }
 

@@ -1,5 +1,7 @@
+
 /**
  * @file
+ * getlocations.css
  * @author Bob Hutchinson http://drupal.org/user/52366
  * @copyright GNU GPL
  *
@@ -15,7 +17,11 @@
 }
 /* see issue #1577634 #6 */
 .getlocations_map_canvas img {
-  max-width: none;
+  max-width: none !important;
+}
+
+.getlocations_streetview_canvas img {
+  max-width: none !important;
 }
 
 .getlocations_map_buttons {
@@ -25,6 +31,9 @@
 
 /* used in getlocations-view-map.tpl */
 .getlocations_map_wrapper {
+}
+
+.getlocations_map_wrapper_inner {
 }
 
 /* map links feature */
@@ -142,4 +151,18 @@ div.fullscreen {
 .sp_phone {
 }
 .sp_web {
+}
+.search_places_input_wrapper {
+}
+
+.getlocations_w3w_throbber {
+  background-image: url('/misc/throbber.gif');
+  background-position: 100% 2px;
+  background-repeat: repeat-y;
+}
+.getlocations_w3w_throbber_active {
+  background-position: 100% -18px;
+}
+.getlocations_w3w_throbber_inactive {
+  background-position: 100% 2px;
 }

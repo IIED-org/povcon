@@ -8,7 +8,7 @@ Drupal.jQueryUiFilter.accordionOptions = Drupal.jQueryUiFilter.accordionOptions 
  */
 Drupal.jQueryUiFilter.accordionScrollTo = function(accordion) {
   var options = $(accordion).data('options') || {}
-  if (!options['scrollTo']) {
+  if (!options['scrollTo'] || !$(accordion).find('.ui-state-active').length) {
     return;
   }
 
@@ -39,11 +39,18 @@ Drupal.jQueryUiFilter.accordionChangeStart = function(event, ui) {
  * On hash change activate and scroll to an accordion element.
  */
 Drupal.jQueryUiFilter.accordionHashChangeEvent = function() {
-  // NOTE: Accordion 'Active' property not change'ing http://bugs.jqueryui.com/ticket/4576
   $accordionHeader = $('.ui-accordion > .ui-accordion-header:has(a[href="' + location.hash + '"])')
   $accordion = $accordionHeader.parent();
   var index = $accordionHeader.prevAll('.ui-accordion-header').length;
-  $accordion.accordion('activate', index);
+
+  if ($.ui.version == '1.8.7') {
+    // NOTE: Accordion 'Active' property not change'ing http://bugs.jqueryui.com/ticket/4576
+    $accordion.accordion('activate', index);
+  }
+  else {
+    // NOTE: Accordion 'Active' property http://api.jqueryui.com/accordion/#option-active
+    $accordion.accordion('option', 'active', index);
+  }
 }
 
 /**

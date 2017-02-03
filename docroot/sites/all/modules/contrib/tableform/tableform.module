@@ -46,14 +46,18 @@ function tableform_element_info() {
  */
 function form_process_tableform($element) {
   // process header cells
-  foreach ($element['#header'] as $key => $cell) {
+  $header_field = isset($element['#tf_header']) ? '#tf_header' : '#header';
+  
+  foreach ($element[$header_field] as $key => $cell) {
     if (is_array($cell)) {
       $element[$key] = $cell;
     }
   }
     
   // process rows  
-  foreach ($element['#options'] as $row_key => $row) {
+  $rows_field = isset($element['#tf_rows']) ? '#tf_rows' : '#options';
+  
+  foreach ($element[$rows_field] as $row_key => $row) {
     foreach ($row as $key => $cell) {
       if (is_array($cell)) {
         $element[$key] = $cell;
@@ -84,15 +88,19 @@ function theme_tableform($variables) {
   $header = array();
   
   // process header cells
-  if (!empty($element['#header'])) {
-    foreach ($element['#header'] as $key => $cell) {
+  $header_field = isset($element['#tf_header']) ? '#tf_header' : '#header';
+  
+  if (!empty($element[$header_field])) {
+    foreach ($element[$header_field] as $key => $cell) {
       $header[] = tableform_render_cell($element, $cell, $key);  
     }
   }
 
   // process rows
-  if (!empty($element['#options'])) {
-    foreach ($element['#options'] as $row) {
+  $rows_field = isset($element['#tf_rows']) ? '#tf_rows' : '#options';
+  
+  if (!empty($element[$rows_field])) {
+    foreach ($element[$rows_field] as $row) {
       $rendered = array(
         'data' => array(),  
       );
