@@ -1,4 +1,0 @@
-name = Edit In-Place
-description = Provides Edit In-Place functionality for fields
-package = User Interface
-core = 7.x
