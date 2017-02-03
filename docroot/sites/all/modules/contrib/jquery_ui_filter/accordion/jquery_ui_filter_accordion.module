@@ -12,13 +12,13 @@ function jquery_ui_filter_accordion_init() {
   $accordion_options = jquery_ui_filter_accordion_get_options();
 
   // Add accordion
-  drupal_add_library('system', 'ui.accordion', TRUE);
+  drupal_add_library('system', 'ui.accordion');
   if (isset($accordion_options['animated']) && $accordion_options['animated'] == 'bounceslide') {
-    drupal_add_library('system', 'effects.bounce', TRUE);
+    drupal_add_library('system', 'effects.bounce');
   }
 
   // Add script and settings.
-  drupal_add_js( drupal_get_path('module', 'jquery_ui_filter_accordion') . '/jquery_ui_filter_accordion.js', array('type' => 'file', 'every_page' => TRUE));
+  drupal_add_js( drupal_get_path('module', 'jquery_ui_filter_accordion') . '/jquery_ui_filter_accordion.js', array('type' => 'file'));
   $settings = array(
     'jQueryUiFilter' => array(
       'accordionHeaderTag' => variable_get('jquery_ui_filter_accordion_header_tag', 'h3'),
@@ -77,10 +77,17 @@ function jquery_ui_filter_accordion_filter_info() {
  */
 function _jquery_ui_filter_accordion_tips_callback($delta = NULL, $format = NULL, $long = FALSE) {
   $t_args = array(
-    '@accordion_header_tag' => '<' . variable_get('jquery_ui_filter_header_tag', 'h3') . '>',
+    '@accordion_header_tag' => '<' . variable_get('jquery_ui_filter_accordion_header_tag', 'h3') . '>',
     '@accordion_href' => 'http://jqueryui.com/demos/accordion/',
   );
   return t('Use [accordion] and [/accordion] with @accordion_header_tag header tags to create a jQuery UI <a href="@accordion_href">Accordian</a> widget. Using [accordion collapsed] will start with the accordion closed.', $t_args);
+}
+
+/**
+ * Jquery UI filter accordion settings.
+ */
+function _jquery_ui_filter_accordion_settings_callback() {
+  return _jquery_ui_filter_settings_callback('accordion');
 }
 
 /**

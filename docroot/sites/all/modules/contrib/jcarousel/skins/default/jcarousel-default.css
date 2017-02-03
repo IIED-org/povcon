@@ -13,61 +13,41 @@
 }
 
 .jcarousel-skin-default .jcarousel-container-horizontal {
- 		background-image: url("bg1.png");
-	    border-bottom: 1px solid #F2F2F2;
-	    border-top: 1px solid #DDDDDD;
-	    box-shadow: 0 0 1px #000000; -webkit-box-shadow: 0 0 1px #000000; -moz-box-shadow: 0 0 1px #000000;
-	    height: 300px;
-	    margin: auto;
-	    padding: 25px 65px 10px;
-	    width: 860px;
+  width: 440px;
+  height: 102px;
+  padding: 20px 40px;
+  margin: auto;
 }
 
 .jcarousel-skin-default .jcarousel-container-vertical {
-  width: 150px;
-  height: 860px;
-  padding: 20px 65px;
+  width: 102px;
+  height: 440px;
+  padding: 40px 20px;
   margin: auto;
 }
 
 .jcarousel-skin-default .jcarousel-clip-horizontal {
-  width: 860px;
+  width: 440px;
   overflow: hidden;
 }
 
 .jcarousel-skin-default .jcarousel-clip-vertical {
-  height: 880px;
+  height: 440px;
   overflow: hidden;
 }
 
 .jcarousel-skin-default .jcarousel-item {
   padding: 0;
-  width: 200px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
+  border: 1px solid #CCC;
   list-style: none;
-
+  background: #fff none;
 }
 
 .jcarousel-skin-default .jcarousel-item-horizontal {
   margin: 0 4px;
-	position: relative;
-}
-
-.jcarousel li{
-	list-style:none;
-}
-
-.jcarousel .views-field-field-slider-caption{
-	background: rgb(0, 0, 0);
-	background: rgba(0, 0, 0, 0.7);
-    bottom: 0;
-    color: #F2F2F2;
-    left: 0;
-    padding: 10px;
-    position: absolute;
-    text-align: left;
-    width: 260px;
-    font-size: 12px;
 }
 
 .jcarousel-skin-default .jcarousel-item-vertical {
@@ -85,9 +65,9 @@
 .jcarousel-skin-default .jcarousel-next,
 .jcarousel-skin-default .jcarousel-prev {
   display: block;
-  width: 60px;
-  height: 55px;
-  background-image: url(arrows-right.png);
+  width: 32px;
+  height: 32px;
+  background-image: url(arrows.png);
 }
 
 .jcarousel-skin-default .jcarousel-next-disabled,
@@ -100,32 +80,28 @@
  */
 .jcarousel-skin-default .jcarousel-prev-horizontal {
   position: absolute;
-  top: 134px;
-  left: 5px;
-  background-position: 0px;
+  top: 55px;
+  left: 10px;
+  background-position: 0 0;
 }
 .jcarousel-skin-default .jcarousel-prev-horizontal:hover {
-  background-position: 0;
+  background-position: -32px 0;
 }
 .jcarousel-skin-default .jcarousel-prev-horizontal:active {
-  background-position: 0;
+  background-position: -64px 0;
 }
 
 .jcarousel-skin-default .jcarousel-next-horizontal {
   position: absolute;
-  top: 134px;
-  right: 4px;
-  background-position: -65px 0px;
+  top: 55px;
+  right: 10px;
+  background-position: 0 -32px;
 }
 .jcarousel-skin-default .jcarousel-next-horizontal:hover {
-  background-position: -65px 0px;
+  background-position: -32px -32px;
 }
 .jcarousel-skin-default .jcarousel-next-horizontal:active {
-  background-position: -65px 0px;
-}
-
-.jcarousel-skin-default .field-content img{
-	box-shadow: 0 0 5px #000;
+  background-position: -64px -32px;
 }
 
 /**
@@ -172,14 +148,5 @@
 .jcarousel-skin-default .jcarousel-navigation li.active a {
   font-weight: bold;
   text-decoration: none;
-}
-
-
-/* custom styles */
-.jcarousel .views-field-field-image .field-content{
-	border-width: 1px;
-	border-style: solid;
-	border-color: #f2f2f2 #222222 #222222 #f2f2f2;
-	height: 280px;
 }
 

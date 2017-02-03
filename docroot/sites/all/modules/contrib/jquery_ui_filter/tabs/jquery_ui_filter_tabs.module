@@ -11,7 +11,13 @@ function jquery_ui_filter_tabs_init() {
   $tabs_options = jquery_ui_filter_tabs_get_options();
 
   // Add tabs
-  drupal_add_library('system', 'ui.tabs', TRUE);
+  drupal_add_library('system', 'ui.tabs');
+
+  // Tabs: Add ui.button for paging.
+  if ($tabs_options['paging']) {
+    drupal_add_library('system', 'ui.button');
+  }
+
   // Tabs: Add jquery.cookie using jquery_plugin.module.
   if (!empty($tabs_options['cookie']) && function_exists('jquery_plugin_add')) {
     jquery_plugin_add('cookie');
@@ -20,8 +26,9 @@ function jquery_ui_filter_tabs_init() {
     unset($tabs_options['cookie']); // Remove cookie option if jquery plugin does not exist.
   }
 
+
   // Add script and settings.
-  drupal_add_js( drupal_get_path('module', 'jquery_ui_filter_tabs') . '/jquery_ui_filter_tabs.js', array('type' => 'file', 'every_page' => TRUE));
+  drupal_add_js( drupal_get_path('module', 'jquery_ui_filter_tabs') . '/jquery_ui_filter_tabs.js', array('type' => 'file'));
   $settings = array(
     'jQueryUiFilter' => array(
       'tabsOptions' => $tabs_options ,
@@ -84,6 +91,13 @@ function _jquery_ui_filter_tabs_tips_callback($delta = NULL, $format = NULL, $lo
     '@tabs_href' => 'http://jqueryui.com/demos/tabs/'
   );
   return t('Use [tabs] and [/tabs] with @tabs_header_tag header tags to create a jQuery UI <a href="@tabs_href">Tabs</a> widget.', $t_args);
+}
+
+/**
+ * Jquery UI filter tabs settings.
+ */
+function _jquery_ui_filter_tabs_settings_callback() {
+  return _jquery_ui_filter_settings_callback('tabs');
 }
 
 /**

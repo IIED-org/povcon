@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * getlocations_fields.views.inc
  * @author Bob Hutchinson http://drupal.org/user/52366
  * @copyright GNU GPL
  *
@@ -256,6 +257,24 @@ function getlocations_fields_views_data() {
       'click sortable' => FALSE,
     ),
   );
+  // wkt
+  $data['getlocations_fields']['wkt'] = array(
+    'title' => t('Wkt'),
+    'help' => t("The coordinates of the selected location in WKT format."),
+    'field' => array(
+      'field' => 'latitude', // The handler adds the longitude.
+      'handler' => 'getlocations_fields_handler_field_wkt',
+      'click sortable' => FALSE,
+    ),
+  );
+  // bbox
+  $data['getlocations_fields']['bbox'] = array(
+    'title' => t('Bounding box'),
+    'help' => t('Filter locations within a bounding box.'),
+    'argument' => array(
+      'handler' => 'getlocations_fields_handler_argument_bbox',
+    ),
+  );
   // distance
   $data['getlocations_fields']['distance'] = array(
     'title' => t('Distance'),
@@ -293,6 +312,19 @@ function getlocations_fields_views_data() {
     ),
   );
 
+  // data
+  $data['getlocations_fields']['data'] = array(
+    'title' => t('Data'),
+    'help' => t('Serialized data of the selected location.'),
+    'field' => array(
+      'handler' => 'getlocations_fields_handler_field_data',
+    ),
+    #'filter' => array(
+    #  'handler' => 'getlocations_fields_handler_filter_data',
+    #),
+
+  );
+
 /*
   // address
   $data['getlocations_fields']['address'] = array(
@@ -322,8 +354,8 @@ function getlocations_fields_views_data() {
       'field' => 'uid',
     ),
     'node' => array(
-      'left_field' => 'nid',
-      'field' => 'nid',
+      'left_field' => 'vid',
+      'field' => 'vid',
     ),
     'node_revision' => array(
       'left_field' => 'vid',
@@ -490,12 +522,10 @@ function getlocations_fields_views_proximity_get_reference_location($view, $opti
     case 'user':
     case 'hybrid':
       global $user;
-      $user_locations = isset($user->locations) ? $user->locations : getlocations_load_locations($user->uid, 'uid');
-      // This user_location_delta will only possibly be set if we are dealing with the filter.
-      $i = (isset($options['user_location_delta']) && !empty($options['user_location_delta'])) ? $options['user_location_delta'] : 0;
-      if (isset($user_locations[$i]['latitude']) || !empty($user_locations[$i]['latitude'])) {
-        $coordinates['latitude'] = (float) $user_locations[$i]['latitude'];
-        $coordinates['longitude'] = (float) $user_locations[$i]['longitude'];
+      $user_locations = getlocations_load_locations($user->uid, 'uid');
+      if (isset($user_locations[0]['latitude']) || !empty($user_locations[0]['latitude'])) {
+        $coordinates['latitude'] = (float) $user_locations[0]['latitude'];
+        $coordinates['longitude'] = (float) $user_locations[0]['longitude'];
       }
       elseif ($options['origin'] == 'hybrid') {
         $coordinates['latitude'] = (isset($options['latitude']) ? (float) $options['latitude'] : 0);
@@ -504,38 +534,14 @@ function getlocations_fields_views_proximity_get_reference_location($view, $opti
       break;
 
     case 'static':
-      // not tested
       $coordinates['latitude'] = (isset($options['latitude']) ? (float) $options['latitude'] : 0);
       $coordinates['longitude'] = (isset($options['longitude']) ? (float) $options['longitude'] : 0);
       break;
-#    case 'tied':
-#      if (!empty($view->filter)) {
-#        foreach ($view->filter as $filter) {
-#          if ($filter->table == 'location' && $filter->field == 'distance' && $filter->options['relationship'] == $options['relationship']) {
-#            $filter_options = array_merge($filter->options, $filter->options['value'], $filter->value);
-#            if ($coords = location_views_proximity_get_reference_location($view, $filter_options)) {
-#              $coordinates['latitude'] = (float) $coords['latitude'];
-#              $coordinates['longitude'] = (float) $coords['longitude'];
-#            }
-#          }
-#        }
-#      }
-#      break;
-#    case 'postal':
-#    case 'postal_default':
-#      // Force default for country.
-#      if ($options['origin'] == 'postal_default') {
-#        $options['country'] = variable_get('location_default_country', 'us');
-#      }
-#      // Zip code lookup.
-#      if (!empty($options['postal_code']) && !empty($options['country'])) {
-#        $coords = location_latlon_rough($options);
-#        if ($coords) {
-#          $coordinates['latitude'] = (float) $coords['lat'];
-#          $coordinates['longitude'] = (float) $coords['lon'];
-#        }
-#      }
-#      break;
+
+    case 'search':
+      $coordinates['latitude'] = (isset($options['latitude']) ? (float) $options['latitude'] : 0);
+      $coordinates['longitude'] = (isset($options['longitude']) ? (float) $options['longitude'] : 0);
+      break;
 
     case 'php':
       ob_start();
@@ -550,30 +556,9 @@ function getlocations_fields_views_proximity_get_reference_location($view, $opti
     case 'nid_arg':
       if ($nodehandler = $view->display_handler->get_handler('argument', $options['nid_arg'])) {
         $nid = $nodehandler->get_value();
-        if ($nid && is_numeric($nid) && $tempobj = node_load($nid)) {
+        if ($nid && is_numeric($nid)) {
+          $tempobj = node_load($nid);
           $field_name = $options['nid_loc_field'];
-          if (isset($tempobj->location['latitude']) && isset($tempobj->location['longitude']) && $field_name == 'node') {
-            $coordinates['latitude'] = (float) $tempobj->location['latitude'];
-            $coordinates['longitude'] = (float) $tempobj->location['longitude'];
-          }
-          else {
-            if (isset($tempobj->{$field_name})) {
-              if (! isset($tempobj->language)) {
-                $lang = 'und';
-              }
-              else {
-                $lang = $tempobj->language;
-                if (! isset($tempobj->{$field_name}[$lang])) {
-                  $lang = 'und';
-                }
-              }
-              $location = $tempobj->{$field_name};
-              if (isset($location[$lang][0]['latitude']) && isset($location[$lang][0]['longitude'])) {
-                $coordinates['latitude'] = (float) $location[$lang][0]['latitude'];
-                $coordinates['longitude'] = (float) $location[$lang][0]['longitude'];
-              }
-            }
-          }
         }
       }
       break;
@@ -581,30 +566,9 @@ function getlocations_fields_views_proximity_get_reference_location($view, $opti
     case 'uid_arg':
       if ($userhandler = $view->display_handler->get_handler('argument', $options['uid_arg'])) {
         $uid = $userhandler->get_value();
-        if ($uid && is_numeric($uid) && $tempobj = user_load($uid)) {
+        if ($uid && is_numeric($uid)) {
+          $tempobj = user_load($uid);
           $field_name = $options['uid_loc_field'];
-          if (isset($tempobj->location['latitude']) && isset($tempobj->location['longitude']) && $field_name == 'user') {
-            $coordinates['latitude'] = (float) $tempobj->location['latitude'];
-            $coordinates['longitude'] = (float) $tempobj->location['longitude'];
-          }
-          else {
-            if (isset($tempobj->{$field_name})) {
-              if (! isset($tempobj->language)) {
-                $lang = 'und';
-              }
-              else {
-                $lang = $tempobj->language;
-                if (! isset($tempobj->{$field_name}[$lang])) {
-                  $lang = 'und';
-                }
-              }
-              $location = $tempobj->{$field_name};
-              if (isset($location[$lang][0]['latitude']) && isset($location[$lang][0]['longitude'])) {
-                $coordinates['latitude'] = (float) $location[$lang][0]['latitude'];
-                $coordinates['longitude'] = (float) $location[$lang][0]['longitude'];
-              }
-            }
-          }
         }
       }
       break;
@@ -612,30 +576,9 @@ function getlocations_fields_views_proximity_get_reference_location($view, $opti
     case 'tid_arg':
       if ($termhandler = $view->display_handler->get_handler('argument', $options['tid_arg'])) {
         $tid = $termhandler->get_value();
-        if ($tid && is_numeric($tid) && $tempobj = taxonomy_term_load($tid)) {
+        if ($tid && is_numeric($tid)) {
+          $tempobj = taxonomy_term_load($tid);
           $field_name = $options['tid_loc_field'];
-          if (isset($tempobj->location['latitude']) && isset($tempobj->location['longitude']) && $field_name == 'taxonomy_term') {
-            $coordinates['latitude'] = (float) $tempobj->location['latitude'];
-            $coordinates['longitude'] = (float) $tempobj->location['longitude'];
-          }
-          else {
-            if (isset($tempobj->{$field_name})) {
-              if (! isset($tempobj->language)) {
-                $lang = 'und';
-              }
-              else {
-                $lang = $tempobj->language;
-                if (! isset($tempobj->{$field_name}[$lang])) {
-                  $lang = 'und';
-                }
-              }
-              $location = $tempobj->{$field_name};
-              if (isset($location[$lang][0]['latitude']) && isset($location[$lang][0]['longitude'])) {
-                $coordinates['latitude'] = (float) $location[$lang][0]['latitude'];
-                $coordinates['longitude'] = (float) $location[$lang][0]['longitude'];
-              }
-            }
-          }
         }
       }
       break;
@@ -644,31 +587,17 @@ function getlocations_fields_views_proximity_get_reference_location($view, $opti
       // not tested
       if ($commenthandler = $view->display_handler->get_handler('argument', $options['cid_arg'])) {
         $cid = $commenthandler->get_value();
-        if ($cid && is_numeric($cid) && $tempobj = comment_load($cid)) {
+        if ($cid && is_numeric($cid)) {
+          $tempobj = comment_load($cid);
           $field_name = $options['cid_loc_field'];
-          if (isset($tempobj->location['latitude']) && isset($tempobj->location['longitude']) && $field_name == 'comment') {
-            $coordinates['latitude'] = (float) $tempobj->location['latitude'];
-            $coordinates['longitude'] = (float) $tempobj->location['longitude'];
-          }
-          else {
-            if (isset($tempobj->{$field_name})) {
-              if (! isset($tempobj->language)) {
-                $lang = 'und';
-              }
-              else {
-                $lang = $tempobj->language;
-                if (! isset($tempobj->{$field_name}[$lang])) {
-                  $lang = 'und';
-                }
-              }
-              $location = $tempobj->{$field_name};
-              if (isset($location[$lang][0]['latitude']) && isset($location[$lang][0]['longitude'])) {
-                $coordinates['latitude'] = (float) $location[$lang][0]['latitude'];
-                $coordinates['longitude'] = (float) $location[$lang][0]['longitude'];
-              }
-            }
-          }
         }
+      }
+      break;
+
+    // getlocations_gps
+    case 'gps':
+      if (module_exists('getlocations_gps')) {
+        $coordinates = getlocations_gps_coords();
       }
       break;
 
@@ -693,6 +622,25 @@ function getlocations_fields_views_proximity_get_reference_location($view, $opti
         $coordinates['longitude'] = (float) $lon;
       }
       break;
+  } // end switch
+
+  if (isset($tempobj) && $tempobj && isset($field_name) && $field_name) {
+    if (isset($tempobj->{$field_name})) {
+      if (! isset($tempobj->language)) {
+        $lang = 'und';
+      }
+      else {
+        $lang = $tempobj->language;
+        if (! isset($tempobj->{$field_name}[$lang])) {
+          $lang = 'und';
+        }
+      }
+      $location = $tempobj->{$field_name};
+      if (isset($location[$lang][0]['latitude']) && isset($location[$lang][0]['longitude'])) {
+        $coordinates['latitude'] = (float) $location[$lang][0]['latitude'];
+        $coordinates['longitude'] = (float) $location[$lang][0]['longitude'];
+      }
+    }
   }
 
   return $coordinates;
@@ -752,3 +700,166 @@ function getlocations_fields_views_proximity_get_location_field_options() {
 #  $data = field_views_field_default_views_data($field);
 #  return $data;
 #}
+
+/**
+ * Implements hook_views_plugins().
+ */
+function getlocations_fields_views_plugins() {
+
+  return array(
+    'module' => 'getlocations_fields',
+    'style' => array(
+      'getlocations_fields_streetview' => array(
+        'title' => t('GetLocations Fields Streetview'),
+        'help' => t('Displays a location in Streetview.'),
+        'handler' => 'getlocations_fields_plugin_style_streetview',
+        'theme' => 'getlocations_fields_view_streetview',
+        'theme path' => GETLOCATIONS_FIELDS_PATH . '/views',
+        'uses row plugin' => TRUE,
+        'uses grouping' => FALSE,
+        'uses options' => TRUE,
+        'type' => 'normal',
+      ),
+    ),
+    'argument default' => array(
+      'querystring' => array(
+        'title' => t('Bounding box from query string'),
+        'handler' => 'getlocations_fields_plugin_argument_default_bboxquery',
+      ),
+    ),
+  );
+}
+
+/**
+ * Preprocess function for getlocations_fields_view_streetview.tpl.
+ * getlocations_fields module only
+ */
+function template_preprocess_getlocations_fields_view_streetview(&$variables) {
+  global $language;
+
+  // just in case
+  if (! getlocations_fields_streetview_settings_allow()) {
+    $variables['mapid'] = FALSE;
+    return;
+  }
+
+  $locations = $variables['view']->style_plugin->rendered_fields;
+  $options = $variables['view']->style_plugin->options;
+  $latlons = array();
+  if (count($locations) == 1) {
+    $location = $locations[0];
+
+    $lid = 0;
+    if (isset($location['glid']) && $location['glid'] > 0 && isset($location['latitude']) && isset($location['longitude'])) {
+      $lid = $location['glid'];
+    }
+
+    if ($lid > 0) {
+      // dump bummers with no lat/lon
+      if ($latlon = getlocations_latlon_check($location['latitude'] . ',' . $location['longitude'])) {
+        $ll = explode(',', $latlon);
+        $location['latitude'] = $ll[0];
+        $location['longitude'] = $ll[1];
+
+        // get defaults
+        $dvals = getlocations_fields_data_keys('d');
+        $options['sv_heading'] = (isset($location['data'])   && is_numeric($location['data'])   ? $location['data']   : $dvals['sv_heading']);
+        $options['sv_zoom']    = (isset($location['data_1']) && is_numeric($location['data_1']) ? $location['data_1'] : $dvals['sv_zoom']);
+        $options['sv_pitch']   = (isset($location['data_2']) && is_numeric($location['data_2']) ? $location['data_2'] : $dvals['sv_pitch']);
+        $options['sv_enable']  = (isset($location['data_3']) && is_numeric($location['data_3']) ? $location['data_3'] : $dvals['sv_enable']);
+
+        $getlocations_defaults = getlocations_defaults();
+        $newdefaults = getlocations_adjust_vars($getlocations_defaults, $options);
+        $mapid = getlocations_setup_map($newdefaults, FALSE, TRUE);
+        $options['latitude'] = $location['latitude'];
+        $options['longitude'] = $location['longitude'];
+
+        getlocations_fields_streetview_js_settings_do($options, $mapid);
+        $variables['mapid'] = $mapid;
+        $variables['width'] = $options['width'];
+        $variables['height'] = $options['height'];
+      }
+    }
+  }
+}
+
+function getlocations_fields_streetview_js_settings_do($defaults, $mapid) {
+
+  $settings = array(
+    $mapid => array(
+      'width'                     => $defaults['width'],
+      'height'                    => $defaults['height'],
+      'sv_addresscontrol'         => $defaults['sv_addresscontrol'],
+      'sv_addresscontrolposition' => $defaults['sv_addresscontrolposition'],
+      'sv_pancontrol'             => $defaults['sv_pancontrol'],
+      'sv_pancontrolposition'     => $defaults['sv_pancontrolposition'],
+      'sv_zoomcontrol'            => $defaults['sv_zoomcontrol'],
+      'sv_zoomcontrolposition'    => $defaults['sv_zoomcontrolposition'],
+      'sv_linkscontrol'           => $defaults['sv_linkscontrol'],
+      'sv_imagedatecontrol'       => $defaults['sv_imagedatecontrol'],
+      'sv_scrollwheel'            => $defaults['sv_scrollwheel'],
+      'sv_clicktogo'              => $defaults['sv_clicktogo'],
+      'latitude'                  => $defaults['latitude'],
+      'longitude'                 => $defaults['longitude'],
+      'sv_heading'                => $defaults['sv_heading'],
+      'sv_zoom'                   => $defaults['sv_zoom'],
+      'sv_pitch'                  => $defaults['sv_pitch'],
+      'sv_enable'                 => $defaults['sv_enable'],
+      'js_path'                   => base_path() . GETLOCATIONS_PATH . '/js/',
+      'sv_fullscreen'             => $defaults['sv_fullscreen'],
+    ),
+  );
+
+  drupal_add_js(array('getlocations_fields_streetview' => $settings), 'setting');
+
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * This hook is called right before the render process. The query has been
+ * executed, and the pre_render() phase has already happened for handlers, so
+ * all data should be available.
+ *
+ * Adding output to the view can be accomplished by placing text on
+ * $view->attachment_before and $view->attachment_after. Altering the content
+ * can be achieved by editing the items of $view->result.
+ *
+ * This hook can be utilized by themes.
+ * @param $view
+ *   The view object about to be processed.
+ */
+function getlocations_fields_views_pre_render(&$view) {
+
+  // look for the right view, machine name must end in getlocations_streetview
+  if (preg_match('/getlocations_streetview$/i', $view->name)) {
+    // streetview killswitch
+    if (getlocations_fields_streetview_settings_allow()) {
+      if (count($view->result) == 1) {
+        if (isset($view->result[0]->getlocations_fields_data)) {
+          // OK, now get the data, unserialize and get sv_enable
+          $value = unserialize($view->result[0]->getlocations_fields_data);
+          $enable = (isset($value['data']['sv_enable']) ? $value['data']['sv_enable'] : 1);
+          if (! $enable) {
+            // scrub the result
+            unset($view->result[0]);
+          }
+        }
+      }
+      else {
+        // scrub the result
+        $c = count($view->result);
+        for ($i = 0; $i < $c; $i++) {
+          unset($view->result[$i]);
+        }
+      }
+    }
+    else {
+      // scrub the result
+      $c = count($view->result);
+      for ($i = 0; $i < $c; $i++) {
+        unset($view->result[$i]);
+      }
+    }
+  }
+}

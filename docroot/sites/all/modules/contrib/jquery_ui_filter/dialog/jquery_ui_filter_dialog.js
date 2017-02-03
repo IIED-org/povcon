@@ -78,6 +78,11 @@ Drupal.jQueryUiFilter.dialogOpen = function(url, options) {
     options
   );
 
+  // Destroy dialog when it is closed.
+  options['close'] = function(event, ui) {
+    $(this).dialog('destroy').remove();
+  }
+
   // Automatically adjust iframe height based on window settings.
   var windowHeight = $(window).height() - 50;
   var windowWidth = $(window).width() - 50;
@@ -104,17 +109,20 @@ Drupal.jQueryUiFilter.dialogOpen = function(url, options) {
   }
   delete options['closeButton'];
 
+  // Set iframe scrolling attribute.
+  options['scrolling'] = options['scrolling'] || 'auto';
+
   // Set dialog URL with ?dialogFeature= parameters.
   url = Drupal.jQueryUiFilter.dialogFeaturesAppendToURL(url, options['dialogFeatures']);
 
-  // Remove existing dialog and iframs, this allows us to reset the
+  // Remove existing dialog and iframe, this allows us to reset the
   // dialog's options and allow dialogs to open external domains.
   $('#jquery-ui-filter-dialog').dialog('destroy').remove();
 
   // Create iframe
   $('body').append('<div id="jquery-ui-filter-dialog">'
     + '<div id="jquery-ui-filter-dialog-container">'
-    + '<iframe id="jquery-ui-filter-dialog-iframe" name="jquery-ui-filter-dialog-iframe" width="100%" height="100%" marginWidth="0" marginHeight="0" frameBorder="0" scrolling="auto" src="' + url + '" />'
+    + '<iframe id="jquery-ui-filter-dialog-iframe" name="jquery-ui-filter-dialog-iframe" width="100%" height="100%" marginWidth="0" marginHeight="0" frameBorder="0" scrolling="' + options['scrolling'] + '" src="' + url + '" />'
     + '</div>'
     + '</div>'
   );
@@ -134,8 +142,8 @@ Drupal.behaviors.jQueryUiFilterDialog = {attach: function(context) {
     return;
   }
 
-  // Append ?jquery_ui_filter_dialog=1 to all link and form action inside a dialog iframe.
-  if (top != self) {
+  // Append ?jquery_ui_filter_dialog=1 to all link and form action inside a dialog iframe with dialogFeatures.
+  if ((top != self) && (self.location.search.indexOf('dialogFeatures') !== -1)) {
     $('a', context).once('jquery-ui-filter-dialog-link', function() {
       if (this.tagName == 'A') {
         this.href = Drupal.jQueryUiFilter.dialogFeaturesAppendToURL(this.href);
