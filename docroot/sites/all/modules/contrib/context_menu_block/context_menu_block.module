@@ -14,11 +14,11 @@ function context_menu_block_help($section) {
       $readme = '<p>' . t('Context: Menu Block allows the Menu Block module to be aware of contexts provided by the Context module by informing menu blocks of active menu context reactions.') . '</p>';
       $readme .= '<p>' . t('For a full description of the module, visit <a href="@url">the project page</a>.',
         array(
-          '@url' => url('http://drupal.org/project/context_menu_block'),
+          '@url' => url('https://www.drupal.org/project/context_menu_block'),
         )) . '</p>';
       $readme .= '<p>' . t('To submit bug reports and feature suggestions, or to track changes, visit <a href="@url">the issue queue</a>.',
         array(
-          '@url' => url('http://drupal.org/project/issues/context_menu_block'),
+          '@url' => url('https://www.drupal.org/project/issues/context_menu_block'),
         )) . '</p>';
 
       $readme .= '<h2>' . t('Requirements') . '</h2>';
@@ -26,27 +26,27 @@ function context_menu_block_help($section) {
       $readme .= '<li>' . t('Drupal 7') . '</li>';
       $readme .= '<li>' . t('<a href="@url">Menu Block</a> 2',
         array(
-          '@url' => url('http://http://drupal.org/project/menu_block'),
+          '@url' => url('https://www.drupal.org/project/menu_block'),
         )) . '</li>';
       $readme .= '<li>' . t('<a href="@url">Context</a> 7.x-3.0-alpha3 or later',
         array(
-          '@url' => url('http://http://drupal.org/project/context'),
+          '@url' => url('https://www.drupal.org/project/context'),
         )) . '</li>';
       $readme .= '</ul>';
 
       $readme .= '<h2>' . t('Installation and Configuration') . '</h2>';
       $readme .= '<p>' . t('Install as usual. See the <a href="@url">handbook page on installing contributed modules</a> for further information.',
         array(
-          '@url' => url('http://drupal.org/node/895232'),
+          '@url' => url('https://www.drupal.org/node/895232'),
         )) . '</p>';
       $readme .= '<p>' . t('If your context reaction uses a second or higher level menu item, the menu block for the menu must have <em>Expand all children of this tree</em> selected in its block configuration.') . '</p>';
 
       $readme .= '<h2>' . t('Acknowledgements') . '</h2>';
       $readme .= '<p>' . t('Context Menu Block is borne from the module created by <a href="@url-nauthiz693">Luke Berg</a> and <a href="@url-niklp">Nik LePage</a> in <a href="@url-issue">issue #751700</a>. It contains additonal bug fixes and provides Context 3 support.',
         array(
-          '@url-nauthiz693' => url('http://drupal.org/user/728256'),
-          '@url-niklp' => url('http://drupal.org/user/71221'),
-          '@url-issue' => url('http://drupal.org/node/751700'),
+          '@url-nauthiz693' => url('https://www.drupal.org/user/728256'),
+          '@url-niklp' => url('https://www.drupal.org/user/71221'),
+          '@url-issue' => url('https://www.drupal.org/node/751700'),
         )) . '</p>';
 
       return $readme;
@@ -123,32 +123,28 @@ function _context_menu_block_active_values($context_name) {
 function context_menu_tree_add_active_path(&$tree, $active_paths) {
 
   foreach (array_keys($tree) as $key) {
-	foreach($active_paths as $active_path) {
-		if (!empty($tree[$key]['link']['href']) && 
-			in_array($tree[$key]['link']['menu_name'] . ":" . $tree[$key]['link']['href'], $active_path) && 
-			!$tree[$key]['link']['hidden']) {
-		  // Set the active trail.
-		  $tree[$key]['link']['in_active_trail'] = TRUE;
-		  
-		  // The Drupal Way is to only set the active menu when the page is actually
-		  // the active page. However, the context reaction is supposed to set the
-		  // active menu. So, we need to "fake" the active menu by styling the link
-		  // as active.
-		  $tree[$key]['link']['localized_options']['attributes']['class'][] = 'active';
-		  
-		  // Found a match, so break the recursion.
-		  return TRUE;
-		}
-		elseif (!empty($tree[$key]['below'])) {
-		  // Check the child menu to see if the active path can be matched.
-		  $tree[$key]['link']['in_active_trail'] = context_menu_tree_add_active_path($tree[$key]['below'], $active_paths);
+    if (!empty($tree[$key]['link']['href']) && in_array($tree[$key]['link']['href'], $active_paths, TRUE)) {
+      // Set the active trail.
+      $tree[$key]['link']['in_active_trail'] = TRUE;
 
-		  // If a match has been found, break the recursion.
-		  if ($tree[$key]['link']['in_active_trail']) {
-			return TRUE;
-		  }
-		}
-	}
+      // The Drupal Way is to only set the active menu when the page is actually
+      // the active page. However, the context reaction is supposed to set the
+      // active menu. So, we need to "fake" the active menu by styling the link
+      // as active.
+      $tree[$key]['link']['localized_options']['attributes']['class'][] = 'active';
+
+      // Found a match, so break the recursion.
+      return TRUE;
+    }
+    elseif (!empty($tree[$key]['below'])) {
+      // Check the child menu to see if the active path can be matched.
+      $tree[$key]['link']['in_active_trail'] = context_menu_tree_add_active_path($tree[$key]['below'], $active_paths);
+
+      // If a match has been found, break the recursion.
+      if ($tree[$key]['link']['in_active_trail']) {
+        return TRUE;
+      }
+    }
   }
 
   // If we didn't find an active item, return FALSE.

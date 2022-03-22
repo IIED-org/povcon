@@ -5,9 +5,8 @@ package = Context
 dependencies[] = context
 dependencies[] = menu_block
 
-; Information added by Drupal.org packaging script on 2015-01-21
-version = "7.x-3.1"
+; Information added by Drupal.org packaging script on 2021-05-14
+version = "7.x-3.2"
 core = "7.x"
 project = "context_menu_block"
-datestamp = "1421799182"
-
+datestamp = "1620972673"
