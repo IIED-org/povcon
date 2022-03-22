@@ -1,0 +1,7 @@
+name: povcon
+recipe: acquia
+config:
+  acli_version: latest
+  ah_application_uuid: 30e7e3f8-abe7-4af4-8592-609c420581cf
+  ah_site_group: povcon
+  php: '7.4'
