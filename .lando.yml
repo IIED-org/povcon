@@ -4,4 +4,16 @@ config:
   acli_version: latest
   ah_application_uuid: 30e7e3f8-abe7-4af4-8592-609c420581cf
   ah_site_group: povcon
-  php: '7.4'
+  php: '8.1'
+  drush: '8.4.10'
+services:
+  appserver:
+    webroot: docroot
+    overrides:
+      environment:
+        DRUSH_OPTIONS_ROOT: '/app/docroot'
+        DRUSH_OPTIONS_URI: 'https://povcon.lndo.site'
+tooling:
+  drush:
+    service: appserver
+    cmd: drush --root=/app/docroot
