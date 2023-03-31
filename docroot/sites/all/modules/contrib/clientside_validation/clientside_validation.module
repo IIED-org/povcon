@@ -1269,7 +1269,7 @@ function _clientside_validation_set_url($name, $title, &$js_rules, $message = ''
 /**
  * Set validation rule for "require at least one of several".
  */
-function _clientside_validation_set_require_oneof($names, $titles, $message = "", &$js_rules) {
+function _clientside_validation_set_require_oneof($names, $titles, $message, &$js_rules) {
   $original_message = $message;
   foreach ($names as $key => $name) {
     $temp_titles = $titles;
@@ -1591,6 +1591,7 @@ function clientside_validation_settings_load($cvs_type = NULL, $cvs_formid = NUL
       $res['settings'] = drupal_array_merge_deep(clientside_validation_settings_load_defaults(), $res['settings']);
     }
     else {
+      $res = [];
       $res['settings'] = clientside_validation_settings_load_defaults();
     }
     return $res;
